@@ -1,0 +1,90 @@
+﻿<Page x:Class="Estate.Pages.PaymentPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Estate.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PaymentPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Ribbon x:Name="RibbonLandlordPage" SelectedIndex="0">
+            <!-- Help Button -->
+            <Ribbon.HelpPaneContent>
+                <RibbonButton SmallImageSource="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\help.png"></RibbonButton>
+            </Ribbon.HelpPaneContent>
+
+            <!-- Quick Access -->
+
+
+            <!-- Side Menu -->
+            <Ribbon.ApplicationMenu >
+                <RibbonApplicationMenu Visibility="Hidden"></RibbonApplicationMenu>
+            </Ribbon.ApplicationMenu>
+
+            <!-- Tab Menu & Groups -->
+            <RibbonTab Header="Money" KeyTip="L">
+                <RibbonGroup Header="Sort">
+                    <RibbonButton SmallImageSource="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\Ascending.png" Label="Ascending"></RibbonButton>
+                    <RibbonButton SmallImageSource="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\Descending.png" Label="Descending"></RibbonButton>
+                </RibbonGroup>
+                <RibbonGroup Header="Search">
+                    <RibbonButton LargeImageSource="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\Search.png" 
+                              Label="Search"></RibbonButton>
+                </RibbonGroup>
+            </RibbonTab>
+            <RibbonTab Header="Payment">
+                <RibbonGroup Header="Payment">
+                    <RibbonButton LargeImageSource="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\Payment.png" Label="Payment"></RibbonButton>
+                </RibbonGroup>
+
+
+            </RibbonTab>
+            <RibbonTab Header="Receivable">
+                <RibbonGroup Header="New">
+                    <RibbonButton LargeImageSource="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\Mortgage.png" Label="Receivable"></RibbonButton>
+                </RibbonGroup>
+
+
+            </RibbonTab>
+            <RibbonTab Header="Edit">
+                <RibbonGroup Header="Payment">
+                    <RibbonButton LargeImageSource="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\Payment.png" 
+                                  Label="Payment"></RibbonButton>
+                </RibbonGroup>
+                <RibbonGroup Header="Receivable">
+                    <RibbonButton LargeImageSource="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\Mortgage.png" 
+                              Label="Receivable"></RibbonButton>
+                </RibbonGroup>
+
+            </RibbonTab>
+            <RibbonTab Header="Delete">
+
+                <RibbonGroup Header="Delete">
+                    <RibbonButton LargeImageSource="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\Delete.png" 
+                              Label="Delete"></RibbonButton>
+                </RibbonGroup>
+            </RibbonTab >
+            <RibbonTab Header="Report">
+                <RibbonGroup Header="Weekly">
+                    <RibbonButton LargeImageSource="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\Weekly.png" Label="Weekly Report"></RibbonButton>
+
+                </RibbonGroup>
+                <RibbonGroup Header="Monthly">
+                    <RibbonButton LargeImageSource="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\Monthly.png" 
+                              Label="Monthly Report"></RibbonButton>
+                </RibbonGroup>
+                <RibbonGroup Header="Annually">
+                    <RibbonButton LargeImageSource="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\Annual.png" 
+                              Label="Annually Report"></RibbonButton>
+                </RibbonGroup>
+            </RibbonTab>
+
+        </Ribbon>
+    </Grid>
+</Page>
