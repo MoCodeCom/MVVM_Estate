@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ModelView\" />
     <Folder Include="Properties\" />
   </ItemGroup>
 

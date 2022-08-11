@@ -138,7 +138,6 @@ namespace Estate.Windows.HomeWin
     {
         public string[] AppDateHomeWin()
         {
-            
             string dayDt = DateTime.Now.ToString("dd");
             string monthDt = DateTime.Now.ToString("MMMM");
             string[] dateArr = {dayDt, monthDt };

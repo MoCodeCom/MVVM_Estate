@@ -1,0 +1,43 @@
+﻿<Page x:Class="Estate.View.Pages.SubPages.Property.Search"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Estate.View.Pages.SubPages.Property"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Search">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Background="LightGray" Grid.Row="0" Grid.Column="0">
+            <DataGrid x:Name="DataGridElement" Padding="10" GridLinesVisibility="None" FontSize="13"
+                      AutoGenerateColumns="False" Height="450" AlternatingRowBackground="LightPink" 
+                      CanUserSortColumns="True" SelectionMode="Single" IsReadOnly="True"
+                      >
+                <DataGrid.Columns>
+
+                    <DataGridTextColumn Header="FullName" Binding="{Binding FullName}" Width="Auto"/>
+                    <DataGridTextColumn Header="LineOne" Binding="{Binding LineOne}" Width="Auto"/>
+                    <DataGridTextColumn Header="LineTwo" Binding="{Binding LineTwo}" Width="Auto"/>
+                    <DataGridTextColumn Header="PostCode" Binding="{Binding PostCode}" Width="Auto"/>
+                    <DataGridTextColumn Header="City" Binding="{Binding City}" Width="Auto"/>
+                    <DataGridTextColumn Header="Country" Binding="{Binding Country}" Width="Auto"/>
+                    <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" Width="Auto"/>
+
+                </DataGrid.Columns>
+
+            </DataGrid>
+        </StackPanel>
+        <StackPanel Background="LightBlue" Grid.Row="0" Grid.Column="1">
+            <Label Margin="30,0,0,0">Search</Label>
+            <TextBox x:Name="FilterContent" Width="200" Height="25" TextChanged="FilterContent_TextChanged"
+                      ></TextBox>
+
+        </StackPanel>
+    </Grid>
+</Page>

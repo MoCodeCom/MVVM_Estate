@@ -25,6 +25,17 @@ namespace Estate.Pages
         public LandlordPage()
         {
             InitializeComponent();
+            InitialPage();
+        }
+
+        public void InitialPage()
+        {
+            if (LandlordFrame.Content != null)
+            {
+                LandlordFrame.Content = null;
+            }
+            Search searchPage = new Search();
+            LandlordFrame.Content = searchPage;
         }
 
         private void RibbonButton_Click(object sender, RoutedEventArgs e)
@@ -41,5 +52,49 @@ namespace Estate.Pages
             Add addPage = new Add();
             LandlordFrame.Content = addPage;
         }
+
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            if (LandlordFrame.Content != null)
+            {
+                LandlordFrame.Content = null;
+            }
+            Search searchPage = new Search();
+            LandlordFrame.Content = searchPage;
+        }
+
+        private void btnAscending_Click(object sender, RoutedEventArgs e)
+        {
+            if(LandlordFrame.Content != null)
+            {
+                LandlordFrame.Content = null;
+            }
+            Search s = new Search();
+            LandlordFrame.Content = s;
+            s.Asort();
+        }
+
+        private void btnDescending_Click(object sender, RoutedEventArgs e)
+        {
+            if (LandlordFrame.Content != null)
+            {
+                LandlordFrame.Content = null;
+            }
+            Search s = new Search();
+            LandlordFrame.Content = s;
+            s.Dsort();
+        }
+
+        private void EditLandlordButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (LandlordFrame.Content != null)
+            {
+                LandlordFrame.Content = null;
+            }
+            Edit editPage = new Edit();
+            LandlordFrame.Content = editPage; 
+        }
+
+        
     }
 }

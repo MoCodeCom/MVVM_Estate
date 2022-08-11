@@ -35,7 +35,6 @@
         <DockPanel Grid.Column="1" >
             <ToolBar DockPanel.Dock="Top">
 
-
                 <StackPanel Orientation="Vertical" VerticalAlignment="Center" >
                     <Button Style="{StaticResource HomeButtonStyle}" Margin="10,0,0,0" Click="Landlord_Button_Click">
                         <Image Source="C:\Users\PC Mohammed\Desktop\VS\Projects\MVVM\Estate\Estate\Model\Images\Landlord.png" 
@@ -44,7 +43,6 @@
                     <TextBlock Text="Landlord" HorizontalAlignment="Center" Foreground="Blue" FontWeight="Bold"></TextBlock>
                 </StackPanel>
 
-
                 <StackPanel Orientation="Vertical" VerticalAlignment="Center" >
                     <Button Style="{StaticResource HomeButtonStyle}" Margin="10,0,0,0" Click="Tenant_Button_Click">
                         <Image Source="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\Tenant.png" Stretch="Fill"/>
@@ -52,14 +50,12 @@
                     <TextBlock Text="Tenant" HorizontalAlignment="Center" Foreground="Blue" FontWeight="Bold"></TextBlock>
                 </StackPanel>
 
-
                 <StackPanel Orientation="Vertical" VerticalAlignment="Center" >
                     <Button Style="{StaticResource HomeButtonStyle}" Margin="10,0,0,0" Click="Property_Button_Click">
                         <Image Source="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\House.png" Stretch="Fill"/>
                     </Button>
                     <TextBlock Text="Property" HorizontalAlignment="Center" Foreground="Blue" FontWeight="Bold"></TextBlock>
                 </StackPanel>
-
 
                 <StackPanel Orientation="Vertical" VerticalAlignment="Center" >
                     <Button Style="{StaticResource HomeButtonStyle}" Margin="10,0,0,0" Click="Money_Button_Click">
@@ -88,8 +84,6 @@
                     </Button>
                     <TextBlock Text="Setting" HorizontalAlignment="Center" Foreground="Blue" FontWeight="Bold"></TextBlock>
                 </StackPanel>
-
-
 
             </ToolBar>
         </DockPanel>

@@ -31,12 +31,14 @@
             <!-- Tab Menu & Groups -->
             <RibbonTab Header="Tenants" KeyTip="L">
                 <RibbonGroup Header="Sort">
-                    <RibbonButton SmallImageSource="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\Ascending.png" Label="Ascending"></RibbonButton>
-                    <RibbonButton SmallImageSource="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\Descending.png" Label="Descending"></RibbonButton>
+                    <RibbonButton SmallImageSource="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\Ascending.png" Label="Ascending"
+                                  x:Name="btnAscending" Click="btnAscending_Click"></RibbonButton>
+                    <RibbonButton SmallImageSource="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\Descending.png" Label="Descending"
+                                  x:Name="btnDescending" Click="btnDescending_Click"></RibbonButton>
                 </RibbonGroup>
                 <RibbonGroup Header="Search">
                     <RibbonButton LargeImageSource="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\Search.png" 
-                              Label="Search"></RibbonButton>
+                              Label="Search" Name="btnSearch" Click="btnSearch_Click"></RibbonButton>
                 </RibbonGroup>
             </RibbonTab>
             <RibbonTab Header="Add">
