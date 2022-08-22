@@ -1,4 +1,5 @@
-﻿using Estate.View.Pages.SubPages.Tenant;
+﻿using Estate.View.Pages.Classes;
+using Estate.View.Pages.SubPages.Tenant;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,55 +30,49 @@ namespace Estate.Pages
 
         public void InitialPage()
         {
-            if (TenantFrame.Content != null)
-            {
-                TenantFrame.Content = null;
-            }
             Search searchPage = new Search();
-            TenantFrame.Content = searchPage;
+            FrameChange f = new FrameChange(searchPage, TenantFrame);
         }
 
         private void AddTenantButton_Click(object sender, RoutedEventArgs e)
         {
-            if (TenantFrame != null)
-            {
-                TenantFrame.Content = null;
-            }
-
             AddTenant add = new AddTenant();
-            TenantFrame.Content = add;
+            FrameChange f = new FrameChange(add, TenantFrame);
         }
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-            if (TenantFrame.Content != null)
-            {
-                TenantFrame.Content = null;
-            }
             Search searchPage = new Search();
-            TenantFrame.Content = searchPage;
+            FrameChange f = new FrameChange(searchPage, TenantFrame);
         }
 
         private void btnAscending_Click(object sender, RoutedEventArgs e)
         {
-            if (TenantFrame.Content != null)
-            {
-                TenantFrame.Content = null;
-            }
+            
             Search s = new Search();
-            TenantFrame.Content = s;
+            FrameChange f = new FrameChange(s, TenantFrame);
             s.Asort();
         }
 
         private void btnDescending_Click(object sender, RoutedEventArgs e)
         {
-            if (TenantFrame.Content != null)
-            {
-                TenantFrame.Content = null;
-            }
             Search s = new Search();
-            TenantFrame.Content = s;
+            FrameChange f = new FrameChange(s, TenantFrame);
             s.Dsort();
+        }
+
+        private void btnEditTenant_Click(object sender, RoutedEventArgs e)
+        {
+            
+            Edit EditPage = new Edit();
+            FrameChange f = new FrameChange(EditPage, TenantFrame);
+        }
+
+        private void btnDeleteTenant_Click(object sender, RoutedEventArgs e)
+        {
+            
+            Delete deletePage = new Delete();
+            FrameChange f = new FrameChange(deletePage, TenantFrame);
         }
     }
 }

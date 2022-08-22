@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Estate.View.Pages.Classes;
 using Estate.View.Pages.SubPages.Landlord;
 using Estate.View.UserControls;
 
@@ -27,15 +28,11 @@ namespace Estate.Pages
             InitializeComponent();
             InitialPage();
         }
-
+        
         public void InitialPage()
         {
-            if (LandlordFrame.Content != null)
-            {
-                LandlordFrame.Content = null;
-            }
             Search searchPage = new Search();
-            LandlordFrame.Content = searchPage;
+            FrameChange f = new FrameChange(searchPage, LandlordFrame);
         }
 
         private void RibbonButton_Click(object sender, RoutedEventArgs e)
@@ -45,56 +42,57 @@ namespace Estate.Pages
 
         private void AddLandlordButton_Click(object sender, RoutedEventArgs e)
         {
-            if (LandlordFrame.Content != null)
-            {
-                LandlordFrame.Content = null;
-            }
+            
             Add addPage = new Add();
-            LandlordFrame.Content = addPage;
+            FrameChange f = new FrameChange(addPage, LandlordFrame);
+
         }
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-            if (LandlordFrame.Content != null)
-            {
-                LandlordFrame.Content = null;
-            }
+
             Search searchPage = new Search();
-            LandlordFrame.Content = searchPage;
+            FrameChange f = new FrameChange(searchPage, LandlordFrame);
         }
 
         private void btnAscending_Click(object sender, RoutedEventArgs e)
         {
-            if(LandlordFrame.Content != null)
-            {
-                LandlordFrame.Content = null;
-            }
+
             Search s = new Search();
-            LandlordFrame.Content = s;
+            FrameChange f = new FrameChange(s, LandlordFrame);
             s.Asort();
         }
 
         private void btnDescending_Click(object sender, RoutedEventArgs e)
         {
-            if (LandlordFrame.Content != null)
-            {
-                LandlordFrame.Content = null;
-            }
+
             Search s = new Search();
-            LandlordFrame.Content = s;
+            FrameChange f = new FrameChange(s, LandlordFrame);
             s.Dsort();
         }
 
         private void EditLandlordButton_Click(object sender, RoutedEventArgs e)
         {
-            if (LandlordFrame.Content != null)
-            {
-                LandlordFrame.Content = null;
-            }
+
             Edit editPage = new Edit();
-            LandlordFrame.Content = editPage; 
+            FrameChange f = new FrameChange(editPage, LandlordFrame);
         }
 
-        
+        private void DeleteLandlordButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            Delete DeletePage = new Delete();
+            FrameChange f = new FrameChange(DeletePage, LandlordFrame);
+
+        }
+
+        private void PrintWeeklyLandlordButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            Print PrintPage = new Print();
+            FrameChange f = new FrameChange(PrintPage, LandlordFrame);
+
+
+        }
     }
 }

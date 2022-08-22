@@ -9,7 +9,7 @@
       Title="HomePage">
 
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Image Source="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\House.png" 
+        <Image Source="pack://application:,,,/Model/Images/House.png" 
                Width="100" Height="100"></Image>
         <TextBlock FontSize="20" Padding="10" FontWeight="Bold">Manage Property Now Easy</TextBlock>
     </StackPanel>

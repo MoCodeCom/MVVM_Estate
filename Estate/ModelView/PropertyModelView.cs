@@ -23,6 +23,11 @@ namespace Estate.ModelView
             set { _GetAll = value; }
         }
 
+        public void Add()
+        {
+            throw new NotImplementedException();
+        }
+
         public void DeleteAll()
         {
             throw new NotImplementedException();

@@ -17,7 +17,7 @@
         <Ribbon x:Name="RibbonLandlordPage" SelectedIndex="0">
             <!-- Help Button -->
             <Ribbon.HelpPaneContent>
-                <RibbonButton SmallImageSource="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\help.png"></RibbonButton>
+                <RibbonButton SmallImageSource="pack://application:,,,/Model/Images/help.png"></RibbonButton>
             </Ribbon.HelpPaneContent>
 
             <!-- Quick Access -->
@@ -31,55 +31,48 @@
             <!-- Tab Menu & Groups -->
             <RibbonTab Header="Properties" KeyTip="L">
                 <RibbonGroup Header="Sort">
-                    <RibbonButton SmallImageSource="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\Ascending.png" 
+                    <RibbonButton SmallImageSource="pack://application:,,,/Model/Images/Ascending.png" 
                                   Label="Ascending" x:Name="btnAscending" Click="btnAscending_Click"></RibbonButton>
-                    <RibbonButton SmallImageSource="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\Descending.png" 
+                    <RibbonButton SmallImageSource="pack://application:,,,/Model/Images/Descending.png" 
                                   Label="Descending" x:Name="btnDescending" Click="btnDescending_Click"></RibbonButton>
                 </RibbonGroup>
                 <RibbonGroup Header="Search">
-                    <RibbonButton LargeImageSource="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\Search.png" 
+                    <RibbonButton LargeImageSource="pack://application:,,,/Model/Images/Search.png" 
                               Label="Search" x:Name="btnSearch" Click="btnSearch_Click"></RibbonButton>
                 </RibbonGroup>
-
-
-
             </RibbonTab>
             <RibbonTab Header="Add">
                 <RibbonGroup Header="New">
-                    <RibbonButton LargeImageSource="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\AddLandlord.png" Label="Add"
+                    <RibbonButton LargeImageSource="pack://application:,,,/Model/Images/AddLandlord.png" Label="Add"
                                   x:Name="btnAddPorperty" Click="btnAddPorperty_Click"></RibbonButton>
                 </RibbonGroup>
-
-
             </RibbonTab>
             <RibbonTab Header="Edit">
-                <RibbonGroup Header="Information">
-                    <RibbonButton LargeImageSource="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\EditLandLord.png" Label="Information"></RibbonButton>
-                </RibbonGroup>
-                <RibbonGroup Header="Property">
-                    <RibbonButton LargeImageSource="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\EditProperty.png" 
-                              Label="Property"></RibbonButton>
+                
+                <RibbonGroup Header="Edit Property">
+                    <RibbonButton LargeImageSource="pack://application:,,,/Model/Images/EditProperty.png" 
+                              Label="Property" x:Name="btnEditPorperty" Click="btnEditPorperty_Click"></RibbonButton>
                 </RibbonGroup>
 
             </RibbonTab>
             <RibbonTab Header="Delete">
 
                 <RibbonGroup Header="Delete">
-                    <RibbonButton LargeImageSource="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\Delete.png" 
-                              Label="Delete"></RibbonButton>
+                    <RibbonButton LargeImageSource="pack://application:,,,/Model/Images/Delete.png" 
+                              Label="Delete" x:Name="btnDeleteProperty" Click="btnDeleteProperty_Click"></RibbonButton>
                 </RibbonGroup>
             </RibbonTab >
             <RibbonTab Header="Report">
                 <RibbonGroup Header="Weekly">
-                    <RibbonButton LargeImageSource="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\Weekly.png" Label="Weekly Report"></RibbonButton>
+                    <RibbonButton LargeImageSource="pack://application:,,,/Model/Images/Weekly.png" Label="Weekly Report"></RibbonButton>
 
                 </RibbonGroup>
                 <RibbonGroup Header="Monthly">
-                    <RibbonButton LargeImageSource="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\Monthly.png" 
+                    <RibbonButton LargeImageSource="pack://application:,,,/Model/Images/Monthly.png" 
                               Label="Monthly Report"></RibbonButton>
                 </RibbonGroup>
                 <RibbonGroup Header="Annually">
-                    <RibbonButton LargeImageSource="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\Annual.png" 
+                    <RibbonButton LargeImageSource="pack://application:,,,/Model/Images/Annual.png" 
                               Label="Annually Report"></RibbonButton>
                 </RibbonGroup>
             </RibbonTab>

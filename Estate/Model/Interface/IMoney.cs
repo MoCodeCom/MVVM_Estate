@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Estate.ModelView
+namespace Estate.Model.Interface
 {
-    public class Sorting
+    public interface IMoney
     {
+        
     }
 }

@@ -1,4 +1,5 @@
-﻿using Estate.View.Pages.SubPages.Property;
+﻿using Estate.View.Pages.Classes;
+using Estate.View.Pages.SubPages.Property;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,54 +30,48 @@ namespace Estate.Pages
 
         private void initialPage()
         {
-            if (PropertyFrame != null)
-            {
-                PropertyFrame.Content = null;
-            }
             Search s = new Search();
-            PropertyFrame.Content = s;
+            FrameChange f = new FrameChange(s, PropertyFrame);
         }
 
         private void btnAddPorperty_Click(object sender, RoutedEventArgs e)
         {
-            if (PropertyFrame != null)
-            {
-                PropertyFrame.Content = null;
-            }
             AddProperty add = new AddProperty();
-            PropertyFrame.Content = add;
+            FrameChange f = new FrameChange(add, PropertyFrame);
         }
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-            if (PropertyFrame != null)
-            {
-                PropertyFrame.Content = null;
-            }
+           
             Search s = new Search();
-            PropertyFrame.Content = s;
+            FrameChange f = new FrameChange(s, PropertyFrame);
         }
 
         private void btnAscending_Click(object sender, RoutedEventArgs e)
         {
-            if (PropertyFrame.Content != null)
-            {
-                PropertyFrame.Content = null;
-            }
             Search s = new Search();
-            PropertyFrame.Content = s;
+            FrameChange f = new FrameChange(s, PropertyFrame);
             s.Asort();
         }
 
         private void btnDescending_Click(object sender, RoutedEventArgs e)
         {
-            if (PropertyFrame.Content != null)
-            {
-                PropertyFrame.Content = null;
-            }
             Search s = new Search();
-            PropertyFrame.Content = s;
+            FrameChange f = new FrameChange(s, PropertyFrame);
             s.Dsort();
+        }
+
+        private void btnEditPorperty_Click(object sender, RoutedEventArgs e)
+        {
+            Edit EditPage = new Edit();
+            FrameChange f = new FrameChange(EditPage, PropertyFrame);
+        }
+
+        private void btnDeleteProperty_Click(object sender, RoutedEventArgs e)
+        {
+            
+            Delete DeletePage = new Delete();
+            FrameChange f = new FrameChange(DeletePage, PropertyFrame);
         }
     }
 }

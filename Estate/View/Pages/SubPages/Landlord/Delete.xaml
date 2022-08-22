@@ -1,0 +1,63 @@
+﻿<Page x:Class="Estate.View.Pages.SubPages.Landlord.Delete"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Estate.View.Pages.SubPages.Landlord"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Delete">
+    <Page.Resources>
+        <Style x:Name="btn" TargetType="Button">
+            <Setter Property="Margin" Value="5"></Setter>
+            <Setter Property="Height" Value="25"></Setter>
+            <Setter Property="Background" Value="#FF47477E"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Background="LightGray" Grid.Row="0" Grid.Column="0">
+            <DataGrid x:Name="DataGridLandlord" Padding="10" GridLinesVisibility="None" FontSize="13"
+                      AutoGenerateColumns="False" Height="450" AlternatingRowBackground="LightGreen" 
+                      CanUserSortColumns="True" SelectionMode="Single" CanUserAddRows="False"
+                      >
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="AscDsc" SortMemberPath="FirstName" 
+                                        Header="FirstName" Binding="{Binding FirstName}" Width="100" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="LastName" Binding="{Binding LastName}" Width="100" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="PostCode" Binding="{Binding PostCode}" Width="100" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" Width="100" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="Auto" IsReadOnly="True"/>
+
+                    <DataGridTemplateColumn Header="Delete">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="DeleteItem" Content="Delete" Width="100" Click="DeleteItem_Click" ></Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                </DataGrid.Columns>
+
+            </DataGrid>
+        </StackPanel>
+        <StackPanel Background="LightBlue" Grid.Row="0" Grid.Column="1">
+            <Label Margin="30,0,0,0">Search</Label>
+            <TextBox x:Name="FilterContent" Width="200" Height="25" TextChanged="FilterContent_TextChanged"
+                      ></TextBox>
+            <Button x:Name="btnDelete" Content="Delete All" Click="btnDelete_Click"></Button>
+
+        </StackPanel>
+    </Grid>
+</Page>

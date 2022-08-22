@@ -65,7 +65,7 @@
 
             <Border CornerRadius="50" Width="70" Height="70" Margin="0,50,0,0" Name="BorderLogin">
                 <Border.Background>
-                    <ImageBrush ImageSource="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\username.png"/>
+                    <ImageBrush ImageSource="pack://application:,,,/Model/Images/username.png"/>
                 </Border.Background>
             </Border>
             
@@ -107,7 +107,7 @@
         </StackPanel>
         <StackPanel Grid.Column="1" Background="#A5C9CA">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Image Source="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\RealestateLogin.png"
+                <Image Source="pack://application:,,,/Model/Images/RealestateLogin.png"
                        Margin="0,80,0,0"></Image>
             </StackPanel>
         </StackPanel>

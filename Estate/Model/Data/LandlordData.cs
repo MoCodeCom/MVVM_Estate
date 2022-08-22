@@ -14,7 +14,6 @@ namespace Estate.Model.Data
         private string _FirstName;
         private string _LastName;
         private AddressData _Address;
-        private string _PostCode;
         private string _Phone;
         private string _Email;
 
@@ -43,14 +42,7 @@ namespace Estate.Model.Data
                 OnPropertyChanged(nameof(Address));
             }
         }
-        public string PostCode {
-            get { return _PostCode; }
-            set
-            {
-                _PostCode = value;
-                OnPropertyChanged(nameof(PostCode));
-            }
-        }
+
         public string Phone {
             get { return _Phone; }
             set

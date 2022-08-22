@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
+using Estate.ModelView.CommandStrings;
 
 namespace Estate.View.Pages.SubPages.Landlord
 {
@@ -30,8 +31,8 @@ namespace Estate.View.Pages.SubPages.Landlord
         public Search()
         {
             InitializeComponent();
-            DataGridLandlord.ItemsSource = new LandlordModelView<LandlordData>().GetAllData;
-
+            DataGridLandlord.ItemsSource = lldata.GetAllLandlords();
+            
         }
         
         private void Filter(TextBox tb)
@@ -41,7 +42,7 @@ namespace Estate.View.Pages.SubPages.Landlord
                 var filterLandlord = lldata.GetAllData.Where(x => 
                 x.FirstName.ToLower().Contains(tb.Text.ToLower()) ||
                 x.LastName.ToLower().Contains(tb.Text.ToLower()) ||
-                x.PostCode.ToLower().Contains(tb.Text.ToLower())||
+                x.Address.PostCode.ToLower().Contains(tb.Text.ToLower())||
                 x.Phone.ToLower().Contains(tb.Text.ToLower()) || 
                 x.Email.ToLower().Contains(tb.Text.ToLower())
                 
@@ -63,16 +64,18 @@ namespace Estate.View.Pages.SubPages.Landlord
 
         public void Dsort()
         {
-            var DESCsortGrid = lldata.GetAllData.OrderByDescending(x => x.FirstName.ToLower());
+            //var DESCsortGrid = lldata.landlordlist().OrderByDescending(x => x.FirstName.ToLower());
+            var DESCsortGrid = lldata.GetAll_1("Default", "ASC");
             DataGridLandlord.ItemsSource = null;
             DataGridLandlord.ItemsSource = DESCsortGrid;
         }
 
         public void Asort()
         {
-            var ASCsort = lldata.GetAllData.OrderBy(x => x.FirstName.ToLower());
+            var ASCsortGrid = lldata.GetAll_1("Default", "DESC");
+            //var ASCsort = lldata.landlordlist().OrderBy(x => x.FirstName.ToLower());
             DataGridLandlord.ItemsSource = null;
-            DataGridLandlord.ItemsSource = ASCsort;
+            DataGridLandlord.ItemsSource = ASCsortGrid;
         }
 
         

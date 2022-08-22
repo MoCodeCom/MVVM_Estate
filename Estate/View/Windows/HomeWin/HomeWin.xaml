@@ -37,50 +37,53 @@
 
                 <StackPanel Orientation="Vertical" VerticalAlignment="Center" >
                     <Button Style="{StaticResource HomeButtonStyle}" Margin="10,0,0,0" Click="Landlord_Button_Click">
-                        <Image Source="C:\Users\PC Mohammed\Desktop\VS\Projects\MVVM\Estate\Estate\Model\Images\Landlord.png" 
-                               Stretch="Fill"/>
+                        <Image x:Name="landlordBtn" 
+                               Stretch="Fill"
+                               Source="pack://application:,,,/Model/Images/Landlord.png">
+                            
+                        </Image>
                     </Button>
                     <TextBlock Text="Landlord" HorizontalAlignment="Center" Foreground="Blue" FontWeight="Bold"></TextBlock>
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical" VerticalAlignment="Center" >
                     <Button Style="{StaticResource HomeButtonStyle}" Margin="10,0,0,0" Click="Tenant_Button_Click">
-                        <Image Source="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\Tenant.png" Stretch="Fill"/>
+                        <Image Source="pack://application:,,,/Model/Images/Tenant.png" Stretch="Fill"/>
                     </Button>
                     <TextBlock Text="Tenant" HorizontalAlignment="Center" Foreground="Blue" FontWeight="Bold"></TextBlock>
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical" VerticalAlignment="Center" >
                     <Button Style="{StaticResource HomeButtonStyle}" Margin="10,0,0,0" Click="Property_Button_Click">
-                        <Image Source="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\House.png" Stretch="Fill"/>
+                        <Image Source="pack://application:,,,/Model/Images/House.png" Stretch="Fill"/>
                     </Button>
                     <TextBlock Text="Property" HorizontalAlignment="Center" Foreground="Blue" FontWeight="Bold"></TextBlock>
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical" VerticalAlignment="Center" >
                     <Button Style="{StaticResource HomeButtonStyle}" Margin="10,0,0,0" Click="Money_Button_Click">
-                        <Image Source="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\Payment.png" Stretch="Fill"/>
+                        <Image Source="pack://application:,,,/Model/Images/Payment.png" Stretch="Fill"/>
                     </Button>
                     <TextBlock Text="Money" HorizontalAlignment="Center" Foreground="Blue" FontWeight="Bold"></TextBlock>
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical" VerticalAlignment="Center" >
                     <Button Style="{StaticResource HomeButtonStyle}" Margin="10,0,0,0" Click="Contract_Button_Click">
-                        <Image Source="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\Contract.png" Stretch="Fill"/>
+                        <Image Source="pack://application:,,,/Model/Images/Contract.png" Stretch="Fill"/>
                     </Button>
                     <TextBlock Text="Contract" HorizontalAlignment="Center" Foreground="Blue" FontWeight="Bold"></TextBlock>
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical" VerticalAlignment="Center" >
                     <Button Style="{StaticResource HomeButtonStyle}" Margin="10,0,0,0" Click="Report_Button_Click">
-                        <Image Source="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\Report.png" Stretch="Fill"/>
+                        <Image Source="pack://application:,,,/Model/Images/Report.png" Stretch="Fill"/>
                     </Button>
                     <TextBlock Text="Report" HorizontalAlignment="Center" Foreground="Blue" FontWeight="Bold"></TextBlock>
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical" VerticalAlignment="Center" >
                     <Button Style="{StaticResource HomeButtonStyle}" Margin="10,0,0,0" Click="Setting_Button_Click">
-                        <Image Source="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\Setting.png" Stretch="Fill"/>
+                        <Image Source="pack://application:,,,/Model/Images/Setting.png" Stretch="Fill"/>
                     </Button>
                     <TextBlock Text="Setting" HorizontalAlignment="Center" Foreground="Blue" FontWeight="Bold"></TextBlock>
                 </StackPanel>
@@ -91,7 +94,7 @@
         <StackPanel Orientation="Vertical"  VerticalAlignment="Center" Grid.Column="2">
             <Button Width="60" Height="60" Margin="10,0,0,0"
                             Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
-                <Image Source="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\user.png" Stretch="Fill"/>
+                <Image Source="pack://application:,,,/Model/Images/user.png" Stretch="Fill"/>
             </Button>
             <TextBlock Text="User" HorizontalAlignment="Center" Foreground="Blue" FontWeight="Bold"></TextBlock>
         </StackPanel>
@@ -101,7 +104,7 @@
         <StackPanel Background="#FF1E5B65" Grid.Row="1" Grid.Column="0" Orientation="Vertical" >
             <StackPanel Orientation="Vertical" Margin="0,30,0,0">
                 <Button Style="{StaticResource HomeButtonStyle}" Margin="10,0,0,0">
-                    <Image Source="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\Notification.png" Stretch="Fill"/>
+                    <Image Source="pack://application:,,,/Model/Images/Notification.png" Stretch="Fill"/>
                 </Button>
                 <TextBlock Text="Notification" HorizontalAlignment="Center" Foreground="White" FontWeight="Bold"></TextBlock>
             </StackPanel>
@@ -121,7 +124,7 @@
 
             <StackPanel Orientation="Vertical" Margin="0,300,0,0">
                 <Button Style="{StaticResource HomeButtonStyle}" Margin="10,0,0,0" Click="Diry_Button_Click">
-                    <Image Source="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\Diry.png" Stretch="Fill"/>
+                    <Image Source="pack://application:,,,/Model/Images/Diry.png" Stretch="Fill"/>
                 </Button>
                 <TextBlock Text="Diry" HorizontalAlignment="Center" Foreground="White" FontWeight="Bold"></TextBlock>
             </StackPanel>
@@ -129,7 +132,7 @@
             <StackPanel Orientation="Vertical" Margin="0,10,0,0">
                 <Button Width="60" Height="60" Margin="10,0,0,0"
                             Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
-                    <Image Source="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\Chart.png" Stretch="Fill"/>
+                    <Image Source="pack://application:,,,/Model/Images/Chart.png" Stretch="Fill"/>
                 </Button>
                 <TextBlock Text="Chart" HorizontalAlignment="Center" Foreground="White" FontWeight="Bold"></TextBlock>
             </StackPanel>

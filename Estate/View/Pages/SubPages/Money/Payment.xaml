@@ -1,0 +1,112 @@
+﻿<Page x:Class="Estate.View.Pages.SubPages.Money.Payment"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Estate.View.Pages.SubPages.Money"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Payment">
+
+    <Page.Resources>
+        <Style TargetType="{x:Type GroupBox}">
+            <Setter Property="FontWeight" Value="Light"></Setter>
+        </Style>
+        <Style x:Name="btn" TargetType="Button">
+            <Setter Property="Margin" Value="5,10,5,0"></Setter>
+            <Setter Property="Height" Value="25"></Setter>
+            <Setter Property="Background" Value="#FF47477E"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Name="txtbox" TargetType="{x:Type TextBox}">
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="MaxLength" Value="50"/>
+            <Setter Property="Width" Value="200"/>
+        </Style>
+
+    </Page.Resources>
+
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Background="LightBlue" Grid.Row="0" Grid.Column="0">
+            <DataGrid x:Name="DataGridMoneyPayment" Padding="10" GridLinesVisibility="None" FontSize="13"
+                      AutoGenerateColumns="False" Height="450" AlternatingRowBackground="LightYellow" 
+                      CanUserSortColumns="True" SelectionMode="Extended" IsReadOnly="True" 
+                      MouseDoubleClick="DataGridMoneyPayment_MouseDoubleClick" 
+                      >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Transaction" Binding="{Binding tansaction}" Width="Auto"/>
+                    <DataGridTextColumn Header="Date" Binding="{Binding date}" Width="100"/>
+                    <DataGridTextColumn Header="Amount" Binding="{Binding amount}" Width="100">
+                        <DataGridTextColumn.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+                                <Setter Property="Foreground" Value="Red"></Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Foreground" Value="Yellow"></Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+        <StackPanel Background="LightBlue" Grid.Row="0" Grid.Column="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+
+
+                <StackPanel Grid.Column="0" Grid.RowSpan="2">
+                    <Label Margin="0,0,0,0" >Search</Label>
+                    <TextBox x:Name="FilterContent" Width="200" Height="25" Grid.Column="0"
+                      TextChanged="FilterContent_TextChanged" ></TextBox>
+                    <GroupBox Header="Transaction">
+                        <StackPanel>
+                            <Label>Transaction</Label>
+                            <TextBox x:Name="txtTransaction"></TextBox>
+                            <Label>Date</Label>
+                            <DatePicker x:Name="txtLineOne" Width="200"></DatePicker>
+                            <Label>Amount</Label>
+                            <TextBox x:Name="txtAmount"></TextBox>
+                            <Label>state</Label>
+                            <TextBox x:Name="txtState"></TextBox>
+                            <Label>Issued</Label>
+                            <TextBox x:Name="txtIssued"></TextBox>
+                            <Label>Payment Method</Label>
+                            <TextBox x:Name="txtPaymentMethod" Margin="0,0,0,10"></TextBox>
+                        </StackPanel>
+                    </GroupBox>
+                    
+                </StackPanel>
+                
+                <GroupBox Grid.Column="1" Grid.Row="1">
+                    <StackPanel Margin="0,10,0,0">
+                        <Button x:Name="btnAdd" Content="Add" ></Button>
+                        <Button x:Name="btnClear" Content="Clear" ></Button>
+                        
+                    </StackPanel>
+                </GroupBox>
+            </Grid>
+
+        </StackPanel>
+    </Grid>
+</Page>

@@ -28,7 +28,10 @@ namespace Estate.Windows.HomeWin
 
             FrameHomeMain.Content = new HomePage().Content;
             dateHomeWin(); // to implement Date Calender in Home Window
+
         }
+
+        
 
         protected override void OnClosing(CancelEventArgs e)
         {

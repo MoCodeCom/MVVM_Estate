@@ -17,7 +17,7 @@
         </Style>
     </Window.Style>
     <Grid>
-        <Image Source="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\SplashHouse.png" 
+        <Image Source="pack://application:,,,/Model/Images/SplashHouse.png" 
                Width="250"></Image>
         <TextBlock Text="Home" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center" 
                    VerticalAlignment="Bottom" Margin="0,50,0,0" Background="Transparent"

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Estate.Model.Data;
+using Estate.Model.Interface;
+using Estate.ModelView;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -62,6 +65,26 @@ namespace Estate.View.Pages.SubPages.Landlord
 
         private void btnSave_Button_Click(object sender, RoutedEventArgs e)
         {
+
+            LandlordModelView<LandlordData> ll = new LandlordModelView<LandlordData>();
+            LandlordData data = new LandlordData()
+            {
+                FirstName = tbfname.Text,
+                LastName = tblname.Text,
+                Address = new AddressData()
+                {
+                    LineOne = tbLineOne.Text,
+                    LineTwo = tbLineOne.Text,
+                    PostCode = tbPostCode.Text,
+                    City = tbCity.Text,
+                    Country = cbCountries.Text
+                },
+                Phone = tbPhone.Text,
+                Email = tbEmail.Text
+
+            };
+            ll.Add_1(data);
+            MessageBox.Show("add done...");
             
             bool emailInspactor = TestContent.IsValidEmailAddress(tbEmail.Text);
             bool fnInspactor = TestContent.IsValidName(tbfname.Text);

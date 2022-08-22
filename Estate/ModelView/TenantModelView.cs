@@ -18,8 +18,10 @@ namespace Estate.ModelView
         public IList<TenantData> GetAllData { get { return _GetAll; } 
             set { _GetAll = value; } }
 
-
-
+        public void Add()
+        {
+            throw new NotImplementedException();
+        }
 
         public void DeleteAll()
         {

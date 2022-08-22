@@ -1,0 +1,55 @@
+﻿<Page x:Class="Estate.View.Pages.SubPages.Money.Money"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Estate.View.Pages.SubPages.Money"
+      xmlns:colorConverterNamespace="clr-namespace:Estate.View.Pages.Classes"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Money">
+    <Page.Resources>
+        <colorConverterNamespace:colorConverter x:Key="colorConverterKey"/>
+        <colorConverterNamespace:AlignmentConvert x:Key="alignmentConvertKey"/>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Background="LightGray" Grid.Row="0" Grid.Column="0">
+            <DataGrid x:Name="DataGridMoney" Padding="10" GridLinesVisibility="None" FontSize="13"
+                      AutoGenerateColumns="False" Height="450" AlternatingRowBackground="LightYellow" 
+                      CanUserSortColumns="True" SelectionMode="Single" IsReadOnly="True" CanUserAddRows="False"
+                      >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Transaction" Binding="{Binding tansaction}" Width="auto"/>
+                    <DataGridTextColumn Header="Date" Binding="{Binding date}" Width="100"/>
+                    <DataGridTextColumn Header="Amount" Binding="{Binding amount}" Width="300">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Foreground" Value="{Binding amount ,Converter={StaticResource colorConverterKey}}"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                        
+                        <DataGridTextColumn.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="HorizontalAlignment" Value="{Binding amount ,Converter={StaticResource alignmentConvertKey}}"></Setter>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
+                        
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+
+            </DataGrid>
+        </StackPanel>
+        <StackPanel Background="LightBlue" Grid.Row="0" Grid.Column="1">
+            <Label Margin="30,0,0,0">Search</Label>
+            <TextBox x:Name="FilterContent" Width="200" Height="25" TextChanged="FilterContent_TextChanged"
+                      ></TextBox>
+
+        </StackPanel>
+    </Grid>
+</Page>

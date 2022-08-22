@@ -21,7 +21,7 @@
                       >
                 <DataGrid.Columns>
 
-                    <DataGridTextColumn Header="FullName" Binding="{Binding FullName}" Width="Auto"/>
+                    <DataGridTextColumn Header="OwnerName" Binding="{Binding FullName}" Width="Auto"/>
                     <DataGridTextColumn Header="LineOne" Binding="{Binding LineOne}" Width="Auto"/>
                     <DataGridTextColumn Header="LineTwo" Binding="{Binding LineTwo}" Width="Auto"/>
                     <DataGridTextColumn Header="PostCode" Binding="{Binding PostCode}" Width="Auto"/>

@@ -9,11 +9,156 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Model\Images\AddLandlord.png" />
+    <None Remove="Model\Images\Annual.png" />
+    <None Remove="Model\Images\Ascending.png" />
+    <None Remove="Model\Images\Chart.png" />
+    <None Remove="Model\Images\Contract.png" />
+    <None Remove="Model\Images\Delete.png" />
+    <None Remove="Model\Images\Descending.png" />
+    <None Remove="Model\Images\Diry.png" />
+    <None Remove="Model\Images\EditLandlord.png" />
+    <None Remove="Model\Images\EditProperty.png" />
+    <None Remove="Model\Images\Exit.png" />
+    <None Remove="Model\Images\help.png" />
+    <None Remove="Model\Images\HomeChart.png" />
+    <None Remove="Model\Images\House.png" />
+    <None Remove="Model\Images\Landlord.png" />
+    <None Remove="Model\Images\Landlordlist.png" />
+    <None Remove="Model\Images\Monthly.png" />
+    <None Remove="Model\Images\mortgage.png" />
+    <None Remove="Model\Images\Next.png" />
+    <None Remove="Model\Images\Notification.png" />
+    <None Remove="Model\Images\Payment.png" />
+    <None Remove="Model\Images\Previous.png" />
+    <None Remove="Model\Images\RealestateLogin.png" />
+    <None Remove="Model\Images\Report.png" />
+    <None Remove="Model\Images\Search.png" />
+    <None Remove="Model\Images\Setting.png" />
+    <None Remove="Model\Images\SplashHouse.png" />
+    <None Remove="Model\Images\Tenant.png" />
+    <None Remove="Model\Images\user.png" />
+    <None Remove="Model\Images\username.png" />
+    <None Remove="Model\Images\Users.png" />
+    <None Remove="Model\Images\Weekly.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="house.ico" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.123" />
+    <PackageReference Include="System.Data.SQLite" Version="1.0.115.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Model\Images\AddLandlord.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Model\Images\Annual.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Model\Images\Ascending.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Model\Images\Chart.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Model\Images\Contract.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Model\Images\Delete.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Model\Images\Descending.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Model\Images\Diry.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Model\Images\EditLandlord.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Model\Images\EditProperty.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Model\Images\Exit.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Model\Images\help.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Model\Images\HomeChart.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Model\Images\House.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Model\Images\Landlord.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Model\Images\Landlordlist.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Model\Images\Monthly.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Model\Images\mortgage.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Model\Images\Next.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Model\Images\Notification.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Model\Images\Payment.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Model\Images\Previous.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Model\Images\RealestateLogin.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Model\Images\Report.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Model\Images\Search.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Model\Images\Setting.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Model\Images\SplashHouse.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Model\Images\Tenant.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Model\Images\user.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Model\Images\username.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Model\Images\Users.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Model\Images\Weekly.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="View\Windows\HomeWin\HomeWin.xaml">
+      <CopyToOutputDirectory></CopyToOutputDirectory>
+    </Page>
   </ItemGroup>
 
 </Project>
