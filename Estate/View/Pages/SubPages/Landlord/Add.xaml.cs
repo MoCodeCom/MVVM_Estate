@@ -30,7 +30,7 @@ namespace Estate.View.Pages.SubPages.Landlord
         {
             InitializeComponent();
             cbCountries.ItemsSource = Enum.GetValues(typeof(contries)).Cast<contries>();
-            
+            Clear();
         }
 
         public enum contries
@@ -65,27 +65,72 @@ namespace Estate.View.Pages.SubPages.Landlord
 
         private void btnSave_Button_Click(object sender, RoutedEventArgs e)
         {
-
-            LandlordModelView<LandlordData> ll = new LandlordModelView<LandlordData>();
-            LandlordData data = new LandlordData()
+            try
             {
-                FirstName = tbfname.Text,
-                LastName = tblname.Text,
-                Address = new AddressData()
-                {
-                    LineOne = tbLineOne.Text,
-                    LineTwo = tbLineOne.Text,
-                    PostCode = tbPostCode.Text,
-                    City = tbCity.Text,
-                    Country = cbCountries.Text
-                },
-                Phone = tbPhone.Text,
-                Email = tbEmail.Text
 
-            };
-            ll.Add_1(data);
-            MessageBox.Show("add done...");
-            
+                LandlordModelView<LandlordData> ll = new LandlordModelView<LandlordData>();
+                if (tbfname.Text == "" && tblname.Text == "" && tbPhone.Text =="" &&tbEmail.Text =="" )
+                {
+                    Reject();
+                }
+                else
+                {
+                    if (tbfname.Text != "" && tblname.Text != "" && tbPhone.Text != "" && tbEmail.Text != "")
+                    {
+                        LandlordData datalandlord = new LandlordData()
+                        {
+                            FirstName = tbfname.Text,
+                            LastName = tblname.Text,
+                            Phone = tbPhone.Text,
+                            Email = tbEmail.Text
+
+                        };
+                        AddressData dataaddress = new AddressData()
+                        {
+                            LineOne = tbLineOne.Text,
+                            LineTwo = tbLineOne.Text,
+                            PostCode = tbPostCode.Text,
+                            City = tbCity.Text,
+                            Country = cbCountries.Text
+                        };
+
+                        ll.Add_1(datalandlord, dataaddress);
+                        MessageBox.Show("The adding is done successfully.");
+                        Clear();
+                    }
+                    Reject();
+                }
+                
+                
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        private void btnClear_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Clear();
+        }
+
+        public void Clear()
+        {
+            tbfname.Text = "";
+            tblname.Text = "";
+            tbLineOne.Text = "";
+            tbLineTwo.Text = "";
+            tbPostCode.Text = "";
+            tbCity.Text = "";
+            cbCountries.Text = "UnitedKingdom";
+            tbPhone.Text = "";
+            tbEmail.Text = "";
+            tbfname.Focus();
+        }
+        public void Reject()
+        {
             bool emailInspactor = TestContent.IsValidEmailAddress(tbEmail.Text);
             bool fnInspactor = TestContent.IsValidName(tbfname.Text);
             bool lnInspactor = TestContent.IsValidName(tblname.Text);
@@ -108,7 +153,7 @@ namespace Estate.View.Pages.SubPages.Landlord
             }
             else
             {
-                errFname.Visibility= Visibility.Hidden;
+                errFname.Visibility = Visibility.Hidden;
             }
 
             if (!lnInspactor)
@@ -140,20 +185,9 @@ namespace Estate.View.Pages.SubPages.Landlord
                 MessageBox.Show("Please re-enter information with red star.");
             }
         }
-
-        private void btnClear_Button_Click(object sender, RoutedEventArgs e)
-        {
-            tbfname.Text = "";
-            tblname.Text = "";
-            tbLineOne.Text = "";
-            tbLineTwo.Text = "";
-            tbPostCode.Text = "";
-            tbCity.Text = "";
-            cbCountries.Text = "UnitedKingdom";
-            tbPhone.Text = "";
-            tbEmail.Text = "";
-        }
     }
+
+    
 
     public static class TestContent
     {

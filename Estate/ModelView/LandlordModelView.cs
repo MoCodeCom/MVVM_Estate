@@ -164,29 +164,59 @@ namespace Estate.ModelView
             SQLiteDataAdapter da = new SQLiteDataAdapter(commandStr, con);
 
             //da.SelectCommand.Parameters.AddWithValue("@fName", );
+            da.InsertCommand = new SQLiteCommand(commandStr, con);
         }
 
-        public void Add_1(LandlordData landlordData)
+        public void Add_1(LandlordData landlordData, AddressData addressData)
         {
             string conStr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
-
-            string commandStr =
-                "INSERT INTO landlordTable (firstName, lastName,phone,email, lineOne, lineTwo, postcode, city, contry) " +
-                "VALUES (@fName,@lName,@phone,@email,@lineone,@linetwo,@postcode,@city,@contry)";
-            SQLiteConnection con = new SQLiteConnection(conStr);
-            SQLiteDataAdapter da = new SQLiteDataAdapter(commandStr, con);
-
-            da.SelectCommand.Parameters.AddWithValue("@fName", landlordData.FirstName);
-            da.SelectCommand.Parameters.AddWithValue("@lName", landlordData.LastName);
-            da.SelectCommand.Parameters.AddWithValue("@phone", landlordData.Phone);
-            da.SelectCommand.Parameters.AddWithValue("@email", landlordData.Email);
-            da.SelectCommand.Parameters.AddWithValue("@lineone", landlordData.Address.LineOne);
-            da.SelectCommand.Parameters.AddWithValue("@linetwo", landlordData.Address.LineTwo);
-            da.SelectCommand.Parameters.AddWithValue("@postcode", landlordData.Address.PostCode);
-            da.SelectCommand.Parameters.AddWithValue("@city", landlordData.Address.City);
-            da.SelectCommand.Parameters.AddWithValue("@contry", landlordData.Address.Country);
-
             
+            string commandLandlordStr =
+                "INSERT INTO LandlordTable (firstName, lastName,phone,email) " +
+                "VALUES ('"+landlordData.FirstName+"','"+landlordData.LastName+"','"+landlordData.Phone+"','"+landlordData.Email+"')";
+            string commandlandlordid = "SELECT id FROM LandlordTable WHERE firstName ='"+landlordData.FirstName+"';";
+            DataTable dt = new DataTable();
+            int? landlordid = null;
+            try
+            {
+                SQLiteConnection conLandlord = new SQLiteConnection(conStr);
+                SQLiteDataAdapter daLandlord = new SQLiteDataAdapter(commandLandlordStr, conLandlord);
+
+                conLandlord.Open();
+                daLandlord.InsertCommand = new SQLiteCommand(commandLandlordStr, conLandlord);
+                daLandlord.InsertCommand.ExecuteNonQuery();
+
+                daLandlord.SelectCommand = new SQLiteCommand(commandlandlordid, conLandlord);
+                daLandlord.Fill(dt);
+                landlordid = Convert.ToInt32(dt.Rows[0][0].ToString());
+
+                conLandlord.Close();
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show(e.Message);
+            }
+
+            string commandAddressStr =
+               "INSERT INTO AddressTable (lineOne, lineTwo, postcode, city, contry, landlord_id)" +
+               " VALUES ('" + addressData.LineOne + "','" + addressData.LineTwo + "','" + addressData.PostCode + "','" + addressData.City + "','" + addressData.Country + "'," + landlordid + ");";
+
+            try
+            {
+                SQLiteConnection conAddress = new SQLiteConnection(conStr);
+                SQLiteDataAdapter daAddress = new SQLiteDataAdapter(commandAddressStr, conAddress);
+                conAddress.Open();
+                daAddress.InsertCommand = new SQLiteCommand(commandAddressStr, conAddress);
+                daAddress.InsertCommand.ExecuteNonQuery();
+                conAddress.Close();
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show(e.Message);
+            }
+
         }
     }
 
