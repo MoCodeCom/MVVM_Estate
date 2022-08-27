@@ -21,19 +21,19 @@ namespace Estate.ModelView
     public class LandlordModelView<T> : IModelView<LandlordData>
     {
         private IList<LandlordData> _GetAll;
+        //private LandlordData landlordData;
+        //private AddressData addressData;
+        private string conStr;
 
         public LandlordModelView()
         {
             _GetAll = GetAllLandlords();
-
         }
 
         public IList<LandlordData> GetAllData { 
             get { return _GetAll; } 
             set { _GetAll = value; }
         }
-
-
 
         public void DeleteAll()
         {
@@ -42,14 +42,14 @@ namespace Estate.ModelView
 
         public void DeleteById(int id)
         {
-            
+            throw new NotImplementedException();
         }
 
         public List<LandlordData> DeleteByFullName(string fullName)
         {
             
 
-                List<LandlordData> li = GetAllData.ToList<LandlordData>();
+            List<LandlordData> li = GetAllData.ToList<LandlordData>();
             GetAllData.Remove(li.FirstOrDefault<LandlordData>(x => x.FirstName + x.LastName == fullName));
             return li;
         }
@@ -64,9 +64,74 @@ namespace Estate.ModelView
             throw new NotImplementedException();
         }
 
-        public void UpdateById(int id)
+        public void UpdateById(string id)
         {
-            throw new NotImplementedException();
+            //UpdateByIdLandlord(id, landlordData, addressData);
+        }
+
+        public int GetId(LandlordData landlordDataId)
+        {
+            int? id = 0;
+            conStr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
+            string commandid = "SELECT id FROM LandlordTable WHERE FirstName='"+landlordDataId.FirstName+"' AND LastName='"+landlordDataId.LastName+"'";
+            try
+            {
+                SQLiteConnection conId = new SQLiteConnection(conStr);
+                SQLiteDataAdapter ad = new SQLiteDataAdapter(commandid, conId);
+                DataTable dt = new DataTable();
+                ad.Fill(dt);
+                for (int i =0;i<dt.Rows.Count ;i++)
+                {
+                    id = Convert.ToInt32(dt.Rows[i][0]);
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            
+            return Convert.ToInt32(id);
+        }
+
+        public void UpdateByIdLandlord(string id, LandlordData landlordData, AddressData addressData)
+        {
+            conStr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
+            string CommandStringLandlord = "UPDATE LandlordTable SET FirstName='"+landlordData.FirstName+"', LastName='"+landlordData.LastName+"'" +
+                ", email='"+landlordData.Email+"', phone='"+landlordData.Phone+"' WHERE phone='" + id + "' ";
+
+            int landlordId = GetId(landlordData);
+            MessageBox.Show(landlordId.ToString());
+
+            string CommandStringAddress = "UPDATE AddressTable SET lineOne='" + addressData.LineOne + "', lineTwo='" + addressData.LineTwo + "'" +
+                ", postcode='" + addressData.PostCode + "', contry='" + addressData.Country + "',city='"+addressData.City+"' " +
+                "WHERE landlord_id="+landlordId+" ";
+
+            try
+            {
+                SQLiteConnection conLandlord = new SQLiteConnection(conStr);
+                SQLiteDataAdapter daLandlord = new SQLiteDataAdapter();
+                conLandlord.Open();
+
+                daLandlord.UpdateCommand = new SQLiteCommand(CommandStringLandlord, conLandlord);
+                daLandlord.UpdateCommand.ExecuteNonQuery();
+
+                conLandlord.Close();
+            }
+            catch (Exception e){ MessageBox.Show(e.Message);}
+
+            try
+            {
+                SQLiteConnection conAddress = new SQLiteConnection(conStr);
+                SQLiteDataAdapter daAddress = new SQLiteDataAdapter(CommandStringAddress,conAddress);
+                conAddress.Open();
+
+                daAddress.UpdateCommand = new SQLiteCommand(CommandStringAddress,conAddress);
+                daAddress.UpdateCommand.ExecuteNonQuery();
+                
+                conAddress.Close();
+
+            }catch (Exception e) { MessageBox.Show(e.Message); }
+            
         }
 
         public List<LandlordData> GetAll_1(string id= "Default",string sorting="Default")

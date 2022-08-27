@@ -8,6 +8,7 @@ namespace Estate.Model.Interface
 {
     public interface ILandlordData
     {
+        public int Id { get;} 
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public AddressData Address { get; set; }

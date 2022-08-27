@@ -11,6 +11,7 @@ namespace Estate.Model.Data
 {
     public class LandlordData : ILandlordData, INotifyPropertyChanged
     {
+        private int _id;
         private string _FirstName;
         private string _LastName;
         private AddressData _Address;
@@ -58,6 +59,11 @@ namespace Estate.Model.Data
                 _Email = value;
                 OnPropertyChanged(nameof(Email));
             }
+        }
+
+        public int Id 
+        { 
+            get { return _id; }  
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

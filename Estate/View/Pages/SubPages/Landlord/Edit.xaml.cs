@@ -1,4 +1,5 @@
 ﻿using Estate.Model.Data;
+using Estate.Model.Interface;
 using Estate.ModelView;
 using System;
 using System.Collections.Generic;
@@ -23,10 +24,14 @@ namespace Estate.View.Pages.SubPages.Landlord
     public partial class Edit : Page
     {
         LandlordModelView<LandlordData> lldata = new LandlordModelView<LandlordData>();
+        LandlordData landlordData;
+        AddressData addressData;
+        
         public Edit()
         {
             InitializeComponent();
             DataGridLandlordEdit.ItemsSource = lldata.GetAllData;
+            Clear();
         }
 
         private void Filter(TextBox tb)
@@ -48,7 +53,6 @@ namespace Estate.View.Pages.SubPages.Landlord
         }
         private void FilterContent_TextChanged(object sender, TextChangedEventArgs e)
         {
-
             var txtbox = sender as TextBox;
             Filter(txtbox);
         }
@@ -59,7 +63,7 @@ namespace Estate.View.Pages.SubPages.Landlord
             if (ItemLandlord != null)
             {
                 string NameStr = ItemLandlord.FirstName.ToLower();
-                var i = lldata.GetAll().Where(x => x.FirstName.ToLower() == NameStr);
+                var i = lldata.GetAllData.Where(x => x.FirstName.ToLower() == NameStr);
                 foreach (var items in i)
                 {
                     txtFristName.Text = items.FirstName;
@@ -71,15 +75,70 @@ namespace Estate.View.Pages.SubPages.Landlord
                     txtPostCode.Text = items.Address.PostCode;
                     txtPhone.Text = items.Phone;
                     txtEmail.Text = items.Email;
-
                     break;
                 }
-
-                
-                
-                
             }
             
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            
+            string id = txtPhone.Text;
+            landlordData = new LandlordData()
+            {
+                FirstName = txtFristName.Text,
+                LastName = txtLastName.Text,
+                Phone = txtLastName.Text,
+                Email = txtEmail.Text
+            };
+
+            addressData = new AddressData()
+            {
+                LineOne = txtLineOne.Text,
+                LineTwo = txtLineTwo.Text,
+                PostCode = txtPostCode.Text,
+                City = txtCity.Text,
+                Country = txtCountry.Text,
+
+            };
+
+            lldata.UpdateByIdLandlord(id,landlordData,addressData);
+            MessageBox.Show("update is done!");
+            
+
+            /*
+            landlordData = new LandlordData()
+            {
+                FirstName = txtFristName.Text,
+                LastName = txtLastName.Text,
+                Phone = txtLastName.Text,
+                Email = txtEmail.Text
+            };
+
+            int i = Convert.ToInt32(lldata.GetId(landlordData));
+            MessageBox.Show(i.ToString());
+
+            */
+        }
+
+        private void btnClear_Click(object sender, RoutedEventArgs e)
+        {
+            Clear();
+        }
+
+        private void Clear()
+        {
+            txtFristName.Text = "";
+            txtLastName.Text = "";
+            txtLineOne.Text = "";
+            txtLineTwo.Text = "";
+            txtPostCode.Text = "";
+            txtCity.Text = "";
+            txtCountry.Text = "";
+            txtPhone.Text = "";
+            txtEmail.Text = "";
+
         }
     }
 }

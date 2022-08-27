@@ -38,5 +38,12 @@ namespace Estate.ModelView.CommandStrings
             return "INSERT INTO " + tableName + " " + cols[0] + "," + cols[1] + "," + cols[2] + "," + cols[3] + 
                 " VALUES (" + values[0] + "," + values[1] + "," + values[2] + "," + values[3] + ");";
         }
+
+        
+        public string UpdateCommand(string tableName)
+        {
+            throw new NotImplementedException();
+        }
+        
     }
 }

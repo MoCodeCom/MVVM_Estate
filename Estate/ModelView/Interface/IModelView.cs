@@ -14,7 +14,7 @@ namespace Estate.ModelView.Interface
         void Add();
         void DeleteById(int id);
         void DeleteAll();
-        void UpdateById(int id);
+        void UpdateById(string id);
 
 
     }
