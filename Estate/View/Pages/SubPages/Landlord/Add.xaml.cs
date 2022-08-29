@@ -100,8 +100,7 @@ namespace Estate.View.Pages.SubPages.Landlord
                     }
                     Reject();
                 }
-                
-                
+
             }
             catch (Exception ex)
             {

@@ -84,49 +84,60 @@ namespace Estate.View.Pages.SubPages.Landlord
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             
-            string id = txtPhone.Text;
-            landlordData = new LandlordData()
-            {
-                FirstName = txtFristName.Text,
-                LastName = txtLastName.Text,
-                Phone = txtLastName.Text,
-                Email = txtEmail.Text
-            };
-
-            addressData = new AddressData()
-            {
-                LineOne = txtLineOne.Text,
-                LineTwo = txtLineTwo.Text,
-                PostCode = txtPostCode.Text,
-                City = txtCity.Text,
-                Country = txtCountry.Text,
-
-            };
-
-            lldata.UpdateByIdLandlord(id,landlordData,addressData);
-            MessageBox.Show("update is done!");
             
 
-            /*
-            landlordData = new LandlordData()
+            try
             {
-                FirstName = txtFristName.Text,
-                LastName = txtLastName.Text,
-                Phone = txtLastName.Text,
-                Email = txtEmail.Text
-            };
+                string newPhone = txtPhone.Text;
 
-            int i = Convert.ToInt32(lldata.GetId(landlordData));
-            MessageBox.Show(i.ToString());
+                landlordData = new LandlordData()
+                {
+                    FirstName = txtFristName.Text,
+                    LastName = txtLastName.Text,
+                    Phone = txtPhone.Text,
+                    Email = txtEmail.Text
+                };
+                addressData = new AddressData()
+                {
+                    LineOne = txtLineOne.Text,
+                    LineTwo = txtLineTwo.Text,
+                    PostCode = txtPostCode.Text,
+                    City = txtCity.Text,
+                    Country = txtCountry.Text
 
-            */
+                };
+
+                LandlordData check = lldata.GetById(lldata.GetId(landlordData));
+                MessageBox.Show(check.Phone+"  --  "+txtPhone.Text +"  ---  "
+                               + lldata.checkPhoneExists(landlordData)+"  ----  "
+                               +TestContent.IsValidPhone(txtPhone.Text));
+                if(check.Phone == txtPhone.Text ||
+                   !lldata.checkPhoneExists(landlordData) &&
+                   TestContent.IsValidPhone(txtPhone.Text))
+                {
+                    lldata.UpdateByIdLandlord(newPhone, landlordData, addressData);
+                    DataGridLandlordEdit.ItemsSource = lldata.GetAllData;
+                    Clear();
+                }
+                else
+                {
+                    MessageBox.Show("The phone number is exist already,\n Or it is written in wrong way!");
+                }
+
+
+                
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
             Clear();
         }
-
         private void Clear()
         {
             txtFristName.Text = "";
@@ -139,6 +150,10 @@ namespace Estate.View.Pages.SubPages.Landlord
             txtPhone.Text = "";
             txtEmail.Text = "";
 
+        }
+        public bool CheckPhone(LandlordData lData)
+        {
+            return lldata.GetAllData.Contains(lData) ? false : true;
         }
     }
 }

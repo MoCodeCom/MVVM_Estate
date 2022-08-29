@@ -41,10 +41,11 @@
                       CanUserSortColumns="True" SelectionMode="Extended" IsReadOnly="True" 
                       MouseDoubleClick="DataGridLandlordEdit_MouseDoubleClick"
                       >
-                <DataGrid.Columns>
+                <DataGrid.Columns >
                     <DataGridTextColumn x:Name="AscDsc" SortMemberPath="FirstName" 
                                         Header="FirstName" Binding="{Binding FirstName}" Width="100"/>
                     <DataGridTextColumn Header="LastName" Binding="{Binding LastName}" Width="100"/>
+                    <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" Width="Auto"/>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
@@ -70,6 +71,7 @@
                             <TextBox x:Name="txtFristName"></TextBox>
                             <Label>Last Name</Label>
                             <TextBox x:Name="txtLastName" Margin="0,0,0,10"></TextBox>
+                            
                         </StackPanel>
                     </GroupBox>
                     <GroupBox Header="Address">

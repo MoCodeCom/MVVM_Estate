@@ -28,6 +28,7 @@ namespace Estate.ModelView
         public LandlordModelView()
         {
             _GetAll = GetAllLandlords();
+            
         }
 
         public IList<LandlordData> GetAllData { 
@@ -47,8 +48,6 @@ namespace Estate.ModelView
 
         public List<LandlordData> DeleteByFullName(string fullName)
         {
-            
-
             List<LandlordData> li = GetAllData.ToList<LandlordData>();
             GetAllData.Remove(li.FirstOrDefault<LandlordData>(x => x.FirstName + x.LastName == fullName));
             return li;
@@ -61,9 +60,32 @@ namespace Estate.ModelView
         }
         public LandlordData GetById(int id)
         {
-            throw new NotImplementedException();
-        }
+            LandlordData lld = new LandlordData();
+            conStr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
 
+            string CommandString = "SELECT * FROM LandlordTable WHERE id = "+id+"";
+            try
+            {
+                SQLiteConnection con = new SQLiteConnection(conStr);
+                SQLiteDataAdapter Landlordad = new SQLiteDataAdapter(CommandString, con);
+                DataTable dt = new DataTable();
+                Landlordad.Fill(dt);
+                for (int r=0; r<dt.Rows.Count; r++)
+                {
+                    lld = new LandlordData()
+                    {
+                        FirstName = dt.Rows[r][1].ToString(),
+                        LastName = dt.Rows[r][2].ToString(),
+                        Phone = dt.Rows[r][3].ToString(),
+                        Email = dt.Rows[r][4].ToString()
+                    };
+                }
+
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message.ToString());}
+            MessageBox.Show(lld.FirstName +" "+lld.LastName +" "+lld.Phone +" "+lld.Email);
+            return lld;
+        }
         public void UpdateById(string id)
         {
             //UpdateByIdLandlord(id, landlordData, addressData);
@@ -92,19 +114,31 @@ namespace Estate.ModelView
             
             return Convert.ToInt32(id);
         }
-
         public void UpdateByIdLandlord(string id, LandlordData landlordData, AddressData addressData)
         {
-            conStr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
-            string CommandStringLandlord = "UPDATE LandlordTable SET FirstName='"+landlordData.FirstName+"', LastName='"+landlordData.LastName+"'" +
-                ", email='"+landlordData.Email+"', phone='"+landlordData.Phone+"' WHERE phone='" + id + "' ";
-
             int landlordId = GetId(landlordData);
-            MessageBox.Show(landlordId.ToString());
+
+            conStr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
+            string CommandStringLandlord = "UPDATE LandlordTable SET FirstName='" + landlordData.FirstName + "', LastName='" + landlordData.LastName + "'" +
+                ", email='" + landlordData.Email + "', phone='" + landlordData.Phone + "' WHERE id=" + landlordId + ";";
 
             string CommandStringAddress = "UPDATE AddressTable SET lineOne='" + addressData.LineOne + "', lineTwo='" + addressData.LineTwo + "'" +
-                ", postcode='" + addressData.PostCode + "', contry='" + addressData.Country + "',city='"+addressData.City+"' " +
-                "WHERE landlord_id="+landlordId+" ";
+                ", postcode='" + addressData.PostCode + "', contry='" + addressData.Country + "',city='" + addressData.City + "'" +
+                "WHERE landlord_id=" + landlordId + "; ";
+
+            try
+            {
+                SQLiteConnection conAddress = new SQLiteConnection(conStr);
+                SQLiteDataAdapter daAddress = new SQLiteDataAdapter(CommandStringAddress, conAddress);
+                conAddress.Open();
+
+                daAddress.UpdateCommand = new SQLiteCommand(CommandStringAddress, conAddress);
+                daAddress.UpdateCommand.ExecuteNonQuery();
+
+                conAddress.Close();
+
+            }
+            catch (Exception e) { MessageBox.Show(e.Message); }
 
             try
             {
@@ -117,20 +151,14 @@ namespace Estate.ModelView
 
                 conLandlord.Close();
             }
-            catch (Exception e){ MessageBox.Show(e.Message);}
+            catch (Exception e) { MessageBox.Show(e.Message); }
 
-            try
-            {
-                SQLiteConnection conAddress = new SQLiteConnection(conStr);
-                SQLiteDataAdapter daAddress = new SQLiteDataAdapter(CommandStringAddress,conAddress);
-                conAddress.Open();
+            
 
-                daAddress.UpdateCommand = new SQLiteCommand(CommandStringAddress,conAddress);
-                daAddress.UpdateCommand.ExecuteNonQuery();
-                
-                conAddress.Close();
-
-            }catch (Exception e) { MessageBox.Show(e.Message); }
+            MessageBox.Show("Update is done.");
+            
+            
+            
             
         }
 
@@ -158,7 +186,6 @@ namespace Estate.ModelView
             SQLiteDataAdapter da = new SQLiteDataAdapter(commandStr, conn);
             DataTable dt = new DataTable();
             da.Fill(dt);
-
 
 
             for (int r = 0; r < dt.Rows.Count; r++)
@@ -282,6 +309,27 @@ namespace Estate.ModelView
                 MessageBox.Show(e.Message);
             }
 
+        }
+        public bool checkPhoneExists(LandlordData lld)
+        {
+            bool result = false;
+            conStr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
+            string CommandString = "SELECT * FROM LandlordTable WHERE phone = '" + lld.Phone + "'";
+            try
+            {
+                
+                SQLiteConnection con = new SQLiteConnection(conStr);
+                SQLiteDataAdapter adlandlord = new SQLiteDataAdapter(CommandString, con);
+                DataTable dt = new DataTable();
+                adlandlord.Fill(dt);
+                result = dt.Rows.Count > 0 ? true : false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
+            return result;
         }
     }
 
