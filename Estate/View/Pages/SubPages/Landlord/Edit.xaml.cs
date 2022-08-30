@@ -26,6 +26,7 @@ namespace Estate.View.Pages.SubPages.Landlord
         LandlordModelView<LandlordData> lldata = new LandlordModelView<LandlordData>();
         LandlordData landlordData;
         AddressData addressData;
+        public int landlordIdindt;
         
         public Edit()
         {
@@ -64,6 +65,8 @@ namespace Estate.View.Pages.SubPages.Landlord
             {
                 string NameStr = ItemLandlord.FirstName.ToLower();
                 var i = lldata.GetAllData.Where(x => x.FirstName.ToLower() == NameStr);
+                landlordIdindt = lldata.GetId(ItemLandlord);
+                
                 foreach (var items in i)
                 {
                     txtFristName.Text = items.FirstName;
@@ -83,20 +86,11 @@ namespace Estate.View.Pages.SubPages.Landlord
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            
-            
-
             try
             {
                 string newPhone = txtPhone.Text;
 
-                landlordData = new LandlordData()
-                {
-                    FirstName = txtFristName.Text,
-                    LastName = txtLastName.Text,
-                    Phone = txtPhone.Text,
-                    Email = txtEmail.Text
-                };
+                
                 addressData = new AddressData()
                 {
                     LineOne = txtLineOne.Text,
@@ -106,32 +100,43 @@ namespace Estate.View.Pages.SubPages.Landlord
                     Country = txtCountry.Text
 
                 };
+                landlordData = new LandlordData()
+                {
+                    //Carried the id in the landlordData with the GetId value.
+                    Id = landlordIdindt,
+                    FirstName = txtFristName.Text,
+                    LastName = txtLastName.Text,
+                    Phone = txtPhone.Text,
+                    Email = txtEmail.Text,
+                    Address = addressData
 
-                LandlordData check = lldata.GetById(lldata.GetId(landlordData));
-                MessageBox.Show(check.Phone+"  --  "+txtPhone.Text +"  ---  "
-                               + lldata.checkPhoneExists(landlordData)+"  ----  "
-                               +TestContent.IsValidPhone(txtPhone.Text));
-                if(check.Phone == txtPhone.Text ||
-                   !lldata.checkPhoneExists(landlordData) &&
+                };
+                //MessageBox.Show(landlordData.Phone +" -- "+ landlordData.FirstName +" -- "+ landlordData.Address.PostCode +" - id : " +lldata.GetId(landlordData) );
+
+                //LandlordData check = lldata.GetById(lldata.GetId(landlordData));
+
+                LandlordData check = lldata.GetById(landlordIdindt);
+
+                // To check the enteries to updated..
+                if (check.Phone == txtPhone.Text || !lldata.checkPhoneExists(landlordData) &&
                    TestContent.IsValidPhone(txtPhone.Text))
                 {
-                    lldata.UpdateByIdLandlord(newPhone, landlordData, addressData);
+                    //lldata.UpdateByIdLandlord(newPhone=txtPhone.Text, landlordData, addressData);
+                    lldata.UpdateById(landlordData);
                     DataGridLandlordEdit.ItemsSource = lldata.GetAllData;
                     Clear();
+                    MessageBox.Show("Update data is done.");
                 }
                 else
                 {
                     MessageBox.Show("The phone number is exist already,\n Or it is written in wrong way!");
                 }
 
-
-                
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            
         }
 
         private void btnClear_Click(object sender, RoutedEventArgs e)

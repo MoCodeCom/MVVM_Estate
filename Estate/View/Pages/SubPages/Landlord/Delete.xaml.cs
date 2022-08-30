@@ -56,9 +56,22 @@ namespace Estate.View.Pages.SubPages.Landlord
             Filter(txtbox);
         }
 
-        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        private void btnDeleteAll_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Are you sure to delete all landlords details in the system?");
+            try
+            {
+                //To delete all details form database.
+                lldata.DeleteAll();
+
+                MessageBox.Show("Delete is done.");
+                DataGridLandlord.ItemsSource = new LandlordModelView<LandlordData>().GetAllData;
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void DeleteItem_Click(object sender, RoutedEventArgs e)
@@ -66,12 +79,15 @@ namespace Estate.View.Pages.SubPages.Landlord
             try
             {
                 var selectedItem = DataGridLandlord.SelectedItem as LandlordData;   
-                MessageBox.Show(selectedItem.FirstName.ToString() + " will deleted");
-                string fullname = (selectedItem.FirstName+selectedItem.LastName).ToString();
+                MessageBox.Show(selectedItem.FirstName.ToString()+ " will deleted");
+
+                //To get the item's id.
+                int SeletctedItemId = lldata.GetId(selectedItem);
+                //To delete item by id.
+                lldata.DeleteById(SeletctedItemId);
                 
-
-                DataGridLandlord.ItemsSource = lldata.DeleteByFullName(fullname);
-
+                MessageBox.Show("Delete is done.");
+                DataGridLandlord.ItemsSource = new LandlordModelView<LandlordData>().GetAllData;
 
             }
             catch (Exception)

@@ -63,7 +63,8 @@ namespace Estate.Model.Data
 
         public int Id 
         { 
-            get { return _id; }  
+            get { return _id; }
+            set { _id = value; OnPropertyChanged(nameof(Id)); }
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

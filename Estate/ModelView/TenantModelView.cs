@@ -65,7 +65,7 @@ namespace Estate.ModelView
             throw new NotImplementedException();
         }
 
-        public void UpdateById(string id)
+        public void UpdateById(TenantData item)
         {
             throw new NotImplementedException();
         }

@@ -88,7 +88,7 @@ namespace Estate.View.Pages.SubPages.Landlord
                         AddressData dataaddress = new AddressData()
                         {
                             LineOne = tbLineOne.Text,
-                            LineTwo = tbLineOne.Text,
+                            LineTwo = tbLineTwo.Text,
                             PostCode = tbPostCode.Text,
                             City = tbCity.Text,
                             Country = cbCountries.Text

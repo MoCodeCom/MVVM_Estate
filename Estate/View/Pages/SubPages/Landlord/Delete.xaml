@@ -56,7 +56,7 @@
             <Label Margin="30,0,0,0">Search</Label>
             <TextBox x:Name="FilterContent" Width="200" Height="25" TextChanged="FilterContent_TextChanged"
                       ></TextBox>
-            <Button x:Name="btnDelete" Content="Delete All" Click="btnDelete_Click"></Button>
+            <Button x:Name="btnDeleteAll" Content="Delete All" Click="btnDeleteAll_Click"></Button>
 
         </StackPanel>
     </Grid>
