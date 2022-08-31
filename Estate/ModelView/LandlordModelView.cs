@@ -28,7 +28,7 @@ namespace Estate.ModelView
 
         public LandlordModelView()
         {
-            _GetAll = GetAllLandlords();
+            _GetAll = GetAll();
             
         }
 
@@ -94,16 +94,41 @@ namespace Estate.ModelView
             }
         }
 
-        public List<LandlordData> DeleteByFullName(string fullName)
-        {
-            List<LandlordData> li = GetAllData.ToList<LandlordData>();
-            GetAllData.Remove(li.FirstOrDefault<LandlordData>(x => x.FirstName + x.LastName == fullName));
-            return li;
-        }
-
         public List<LandlordData> GetAll()
         {
-            throw new NotImplementedException();
+
+            List<LandlordData> li = new List<LandlordData>();
+
+            string conStr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
+            string commandStr = "SELECT * FROM LandlordTable INNER JOIN AddressTable ON LandlordTable.id = AddressTable.landlord_id;";
+
+            SQLiteConnection conn = new SQLiteConnection(conStr);
+            SQLiteDataAdapter da = new SQLiteDataAdapter(commandStr, conn);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+
+
+            for (int r = 0; r < dt.Rows.Count; r++)
+            {
+                li.Add(new LandlordData()
+                {
+                    FirstName = dt.Rows[r][1].ToString(),
+                    LastName = dt.Rows[r][2].ToString(),
+                    Phone = dt.Rows[r][3].ToString(),
+                    Email = dt.Rows[r][4].ToString(),
+
+                    Address = new AddressData()
+                    {
+                        LineOne = dt.Rows[r][6].ToString(),
+                        LineTwo = dt.Rows[r][7].ToString(),
+                        PostCode = dt.Rows[r][8].ToString(),
+                        City = dt.Rows[r][9].ToString(),
+                        Country = dt.Rows[r][10].ToString()
+                    },
+                }); ;
+            }
+            return li;
 
         }
         public LandlordData GetById(int id)
@@ -134,10 +159,9 @@ namespace Estate.ModelView
             
             return lld;
         }
+        
         public void UpdateById(LandlordData item)
         {
-
-
             conStr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
             //pass landlord id by item when it's selected
             int landlordId = item.Id;
@@ -175,220 +199,59 @@ namespace Estate.ModelView
             }
         }
 
-        //To get the int id by the landlord property.
-        public int GetId(LandlordData landlordDataId)
+        public void Add(LandlordData item)
         {
-            int? id = 0;
-            conStr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
-            string commandid = 
-                "SELECT id FROM LandlordTable WHERE firstName='"+landlordDataId.FirstName+
-                "' AND lastName='"+landlordDataId.LastName+"' AND phone='"+landlordDataId.Phone+"';";
+            //Adding landlord data
             try
             {
-                SQLiteConnection conId = new SQLiteConnection(conStr);
-                SQLiteDataAdapter ad = new SQLiteDataAdapter(commandid, conId);
-                DataTable dt = new DataTable();
-                ad.Fill(dt);
-                for (int i =0;i<dt.Rows.Count ;i++)
-                {
-                    id = Convert.ToInt32(dt.Rows[i][0]);
-                }
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
-            return Convert.ToInt32(id);
-        }
-        public void UpdateByIdLandlord(string id, LandlordData landlordData, AddressData addressData)
-        {
-            int landlordId = GetId(landlordData);
+                string conStr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
+                string commandStrLandlord =
+                    "INSERT INTO LandlordTable (firstName, lastName,phone,email) VALUES" +
+                    "('" + item.FirstName + "','" + item.LastName + "','" + item.Phone + "','" + item.Email + "');";
 
-            conStr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
-            string CommandStringLandlord = "UPDATE LandlordTable SET FirstName='" + landlordData.FirstName + "', LastName='" + landlordData.LastName + "'" +
-                ", email='" + landlordData.Email + "', phone='" + landlordData.Phone + "' WHERE id=" + landlordId + ";";
+                SQLiteConnection con = new SQLiteConnection(conStr);
+                SQLiteDataAdapter daLandlord = new SQLiteDataAdapter(commandStrLandlord, con);
+                
 
-            string CommandStringAddress = "UPDATE AddressTable SET lineOne='" + addressData.LineOne + "', lineTwo='" + addressData.LineTwo + "'" +
-                ", postcode='" + addressData.PostCode + "', contry='" + addressData.Country + "',city='" + addressData.City + "'" +
-                "WHERE landlord_id=" + landlordId + "; ";
-
-            try
-            {
-                SQLiteConnection conAddress = new SQLiteConnection(conStr);
-                SQLiteDataAdapter daAddress = new SQLiteDataAdapter(CommandStringAddress, conAddress);
-                conAddress.Open();
-
-                daAddress.UpdateCommand = new SQLiteCommand(CommandStringAddress, conAddress);
-                daAddress.UpdateCommand.ExecuteNonQuery();
-
-                conAddress.Close();
-
-            }
-            catch (Exception e) { MessageBox.Show(e.Message); }
-
-            try
-            {
-                SQLiteConnection conLandlord = new SQLiteConnection(conStr);
-                SQLiteDataAdapter daLandlord = new SQLiteDataAdapter();
-                conLandlord.Open();
-
-                daLandlord.UpdateCommand = new SQLiteCommand(CommandStringLandlord, conLandlord);
-                daLandlord.UpdateCommand.ExecuteNonQuery();
-
-                conLandlord.Close();
-            }
-            catch (Exception e) { MessageBox.Show(e.Message); }
-            MessageBox.Show("Update is done.");
-        }
-
-        public List<LandlordData> GetAll_1(string id= "Default",string sorting="Default")
-        {
-            List<LandlordData> li = new List<LandlordData>();
-
-            string conStr = ConfigurationManager.ConnectionStrings[id].ConnectionString;
-            string commandStr;
-            if (sorting == "ASC")
-            {
-                commandStr = new SqliteCommands()
-                    .SelectAllASC("LandlordTable","AddressTable","id","landlord_id","firstName" );
-            }else if (sorting == "DESC")
-            {
-                commandStr = new SqliteCommands()
-                    .SelectAllDESC("LandlordTable", "AddressTable", "id", "landlord_id", "firstName");
-            }
-            else
-            {
-                commandStr = new SqliteCommands().SelectAllTwoTables("LandlordTable","AddressTable","id","landlordTable");
-            }
-
-            SQLiteConnection conn = new SQLiteConnection(conStr);
-            SQLiteDataAdapter da = new SQLiteDataAdapter(commandStr, conn);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-
-
-            for (int r = 0; r < dt.Rows.Count; r++)
-            {
-                li.Add(new LandlordData()
-                {
-                    FirstName = dt.Rows[r][1].ToString(),
-                    LastName = dt.Rows[r][2].ToString(),
-                    Phone = dt.Rows[r][3].ToString(),
-                    Email = dt.Rows[r][4].ToString(),
-
-                    Address = new AddressData()
-                    {
-                        LineOne = dt.Rows[r][6].ToString(),
-                        LineTwo = dt.Rows[r][7].ToString(),
-                        PostCode = dt.Rows[r][8].ToString(),
-                        City = dt.Rows[r][9].ToString(),
-                        Country = dt.Rows[r][10].ToString()
-                    },
-                }); ;
-            }
-            return li;
-        }
-
-        public List<LandlordData> GetAllLandlords(string id = "Default")
-        {
-            List<LandlordData> li = new List<LandlordData>();
-
-            string conStr = ConfigurationManager.ConnectionStrings[id].ConnectionString;
-            string commandStr = "SELECT * FROM LandlordTable INNER JOIN AddressTable ON LandlordTable.id = AddressTable.landlord_id;";
-            
-            SQLiteConnection conn = new SQLiteConnection(conStr);
-            SQLiteDataAdapter da = new SQLiteDataAdapter(commandStr, conn);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-
-
-
-            for (int r = 0; r < dt.Rows.Count; r++)
-            {
-                li.Add(new LandlordData()
-                {
-                    FirstName = dt.Rows[r][1].ToString(),
-                    LastName = dt.Rows[r][2].ToString(),
-                    Phone = dt.Rows[r][3].ToString(),
-                    Email = dt.Rows[r][4].ToString(),
-
-                    Address = new AddressData()
-                    {
-                        LineOne = dt.Rows[r][6].ToString(),
-                        LineTwo = dt.Rows[r][7].ToString(),
-                        PostCode = dt.Rows[r][8].ToString(),
-                        City = dt.Rows[r][9].ToString(),
-                        Country = dt.Rows[r][10].ToString()
-                    },
-                }); ;
-            }
-            return li;
-        }
-
-        public void Add()
-        {
-            string conStr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
-
-            string commandStr =
-                "INSERT INTO landlordTable (firstName, lastName,phone,email) VALUES (@fName,@lName,@phone,@email)";
-            SQLiteConnection con = new SQLiteConnection(conStr);
-            SQLiteDataAdapter da = new SQLiteDataAdapter(commandStr, con);
-
-            //da.SelectCommand.Parameters.AddWithValue("@fName", );
-            da.InsertCommand = new SQLiteCommand(commandStr, con);
-        }
-
-        public void Add_1(LandlordData landlordData, AddressData addressData)
-        {
-            string conStr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
-            
-            string commandLandlordStr =
-                "INSERT INTO LandlordTable (firstName, lastName,phone,email) " +
-                "VALUES ('"+landlordData.FirstName+"','"+landlordData.LastName+"','"+landlordData.Phone+"','"+landlordData.Email+"')";
-            string commandlandlordid = "SELECT id FROM LandlordTable WHERE firstName ='"+landlordData.FirstName+"';";
-            DataTable dt = new DataTable();
-            int? landlordid = null;
-            try
-            {
-                SQLiteConnection conLandlord = new SQLiteConnection(conStr);
-                SQLiteDataAdapter daLandlord = new SQLiteDataAdapter(commandLandlordStr, conLandlord);
-
-                conLandlord.Open();
-                daLandlord.InsertCommand = new SQLiteCommand(commandLandlordStr, conLandlord);
+                con.Open();
+                daLandlord.InsertCommand = new SQLiteCommand(commandStrLandlord, con);
                 daLandlord.InsertCommand.ExecuteNonQuery();
+                con.Close();
+                /************************************************/
 
-                daLandlord.SelectCommand = new SQLiteCommand(commandlandlordid, conLandlord);
-                daLandlord.Fill(dt);
-                landlordid = Convert.ToInt32(dt.Rows[0][0].ToString());
-
-                conLandlord.Close();
+                
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
 
-                MessageBox.Show(e.Message);
+                MessageBox.Show(ex.Message.ToString());
             }
-
-            string commandAddressStr =
-               "INSERT INTO AddressTable (lineOne, lineTwo, postcode, city, contry, landlord_id)" +
-               " VALUES ('" + addressData.LineOne + "','" + addressData.LineTwo + "','" + addressData.PostCode + "','" + addressData.City + "','" + addressData.Country + "'," + landlordid + ");";
-
+            //Adding Address data
             try
             {
-                SQLiteConnection conAddress = new SQLiteConnection(conStr);
-                SQLiteDataAdapter daAddress = new SQLiteDataAdapter(commandAddressStr, conAddress);
-                conAddress.Open();
-                daAddress.InsertCommand = new SQLiteCommand(commandAddressStr, conAddress);
+                SQLiteConnection con = new SQLiteConnection(conStr);
+                int lastIdCount = GetIdByPhone(item.Phone);
+                string commandStrAddress = "INSERT INTO AddressTable (lineOne, lineTwo, postcode, city, contry, landlord_id)" +
+                    "VALUES ('" + item.Address.LineOne + "','" + item.Address.LineTwo + "','" + item.Address.PostCode + "','" + item.Address.City + "','" + item.Address.Country + "'," + lastIdCount + ");";
+
+                SQLiteDataAdapter daAddress = new SQLiteDataAdapter(commandStrAddress, con);
+                con.Open();
+                daAddress.InsertCommand = new SQLiteCommand(commandStrAddress, con);
                 daAddress.InsertCommand.ExecuteNonQuery();
-                conAddress.Close();
+                con.Close();
+                /*************************************************/
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-
-                MessageBox.Show(e.Message);
+                MessageBox.Show(ex.Message.ToString());
             }
 
+            
         }
+
+
+
+
 
         //To check whether the Landlord property is exist already?
         public bool checkPhoneExists(LandlordData lld)
@@ -447,111 +310,76 @@ namespace Estate.ModelView
 
             return addressdata;
         }
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*
-    public class LandlordModelView<T> : IModelView<LandlordData>
-    {
-        private ObservableCollection<LandlordData> _GetAll;
-
-        public LandlordModelView()
+        public int GetLastId()
         {
-
-        }
-
-
-
-
-        public void DeleteAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public  ObservableCollection<LandlordData> GetAll()
-        {
-            ObservableCollection<LandlordData> li = new ObservableCollection<LandlordData>();
-            li.Add(new LandlordData()
+            int idCount = 0;
+            conStr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
+            string CommandString = "SELECT id FROM LandlordTable ORDER BY id DESC LIMIT 1;";
+            try
             {
-                FirstName = "Mohammed",
-                LastName = "Alfadhel",
+                SQLiteConnection conn = new SQLiteConnection(conStr);
+                SQLiteDataAdapter adId = new SQLiteDataAdapter(CommandString, conn);
+                DataTable dt = new DataTable();
+
+                adId.Fill(dt);
+                idCount = Convert.ToInt32(dt.Rows[0][0]);
                 
-                Address = new AddressData()
-                    { LineOne = "73 conybere", LineTwo = "Higate",
-                        PostCode = "B12 0YL", Country = "UnitedKingdom" },
-                PostCode = "B12 0YL",
-                Email = "mjmdell@gmial.com",
-                Phone = "07460726920"
-            }) ;
 
-            li.Add(new LandlordData()
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+
+            return idCount;
+        }
+        //To get the int id by the landlord property.
+        public int GetId(LandlordData landlordDataId)
+        {
+            int id=0;
+            conStr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
+            string commandid =
+                "SELECT id FROM LandlordTable WHERE firstName='" + landlordDataId.FirstName +
+                "' AND lastName='" + landlordDataId.LastName + "' AND phone='" + landlordDataId.Phone + "';";
+            try
+            {
+                SQLiteConnection conId = new SQLiteConnection(conStr);
+                SQLiteDataAdapter ad = new SQLiteDataAdapter(commandid, conId);
+                DataTable dt = new DataTable();
+                ad.Fill(dt);
+                for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    FirstName = "Hasan",
-                    LastName = "Alfadhel",
-                    Address = new AddressData()
-                    { LineOne = "73 conybere", LineTwo = "Higate", 
-                        PostCode = "B18 0YL", Country = "UnitedKingdom" },
-                    PostCode = "B18 0YL",
-                    Email = "hasandell@gmial.com",
-                    Phone = "07460726930"
-                });
-
-            li.Add(new LandlordData()
-                    {
-                        FirstName = "Ahmed",
-                        LastName = "Alfadhel",
-                        Address = new AddressData()
-                        { LineOne = "73 conybere", LineTwo = "Higate", 
-                            PostCode = "B32 0YL", Country = "UnitedKingdom" },
-                        PostCode = "B32 0YL",
-                        Email = "ahmeddell@gmial.com",
-                        Phone = "07460782920"
-                    });
-
-            li.Add(new LandlordData()
-                    {
-                        FirstName = "Rasha",
-                        LastName = "Almohy",
-                        Address = new AddressData()
-                        { LineOne = "73 conybere", LineTwo = "Higate", 
-                            PostCode = "B1 0YL", Country = "UnitedKingdom" },
-                        PostCode = "B1 0YL",
-                        Email = "rashaell@gmial.com",
-                        Phone = "07460726925"
-                    });
-
-
-            return li;
+                    id = Convert.ToInt32(dt.Rows[i][0]);
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            return Convert.ToInt32(id);
         }
-
-        public LandlordData GetById(int id)
+        public int GetIdByPhone(string phoneStr)
         {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateById(int id)
-        {
-            throw new NotImplementedException();
+            int id = 0;
+            conStr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
+            string commandid =
+                "SELECT id FROM LandlordTable WHERE phone='" + phoneStr + "';";
+            try
+            {
+                SQLiteConnection conId = new SQLiteConnection(conStr);
+                SQLiteDataAdapter ad = new SQLiteDataAdapter(commandid, conId);
+                DataTable dt = new DataTable();
+                ad.Fill(dt);
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    id = Convert.ToInt32(dt.Rows[i][0]);
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            return Convert.ToInt32(id);
         }
     }
-    */
-
-
 }

@@ -1,0 +1,20 @@
+CREATE TABLE "AddressTable" (
+	"id"	INTEGER NOT NULL UNIQUE,
+	"lineOne"	TEXT NOT NULL,
+	"lineTwo"	TEXT,
+	"postcode"	TEXT NOT NULL,
+	"city"	TEXT NOT NULL,
+	"contry"	TEXT NOT NULL,
+	"landlord_id"	INTEGER,
+	PRIMARY KEY("id"),
+	FOREIGN KEY("Landlord_id") REFERENCES "LandlordTable"("id")
+);
+
+CREATE TABLE "LandlordTable" (
+	"id"	INTEGER NOT NULL UNIQUE,
+	"firstName"	TEXT NOT NULL,
+	"lastName"	TEXT NOT NULL,
+	"phone"	TEXT,
+	"email"	TEXT,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);

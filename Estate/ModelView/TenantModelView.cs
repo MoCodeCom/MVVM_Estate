@@ -18,7 +18,7 @@ namespace Estate.ModelView
         public IList<TenantData> GetAllData { get { return _GetAll; } 
             set { _GetAll = value; } }
 
-        public void Add()
+        public void Add(TenantData item)
         {
             throw new NotImplementedException();
         }

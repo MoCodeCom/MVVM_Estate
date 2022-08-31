@@ -36,7 +36,7 @@
                     <DataGridTextColumn x:Name="AscDsc" SortMemberPath="FirstName" 
                                         Header="FirstName" Binding="{Binding FirstName}" Width="100" IsReadOnly="True"/>
                     <DataGridTextColumn Header="LastName" Binding="{Binding LastName}" Width="100" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="PostCode" Binding="{Binding PostCode}" Width="100" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="PostCode" Binding="{Binding Address.PostCode}" Width="100" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" Width="100" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="Auto" IsReadOnly="True"/>
 

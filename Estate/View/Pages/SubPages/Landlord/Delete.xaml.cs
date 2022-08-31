@@ -58,14 +58,27 @@ namespace Estate.View.Pages.SubPages.Landlord
 
         private void btnDeleteAll_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Are you sure to delete all landlords details in the system?");
+            MessageBoxResult Result = MessageBox.Show("Are you sure to delete all landlords details from the system?","Delete All",
+                MessageBoxButton.OKCancel,MessageBoxImage.Warning);
             try
             {
-                //To delete all details form database.
-                lldata.DeleteAll();
+                switch (Result)
+                {
+                    case MessageBoxResult.None:
+                        break;
+                    case MessageBoxResult.OK:
+                        //To delete all details form database.
+                        lldata.DeleteAll();
 
-                MessageBox.Show("Delete is done.");
-                DataGridLandlord.ItemsSource = new LandlordModelView<LandlordData>().GetAllData;
+                        MessageBox.Show("Delete is done.");
+                        DataGridLandlord.ItemsSource = new LandlordModelView<LandlordData>().GetAllData;
+                        break;
+                    case MessageBoxResult.Cancel:
+                        break;
+                    default:
+                        break;
+                }
+                
             }
             catch (Exception ex)
             {
@@ -79,16 +92,27 @@ namespace Estate.View.Pages.SubPages.Landlord
             try
             {
                 var selectedItem = DataGridLandlord.SelectedItem as LandlordData;   
-                MessageBox.Show(selectedItem.FirstName.ToString()+ " will deleted");
+                MessageBoxResult Result =  MessageBox.Show(selectedItem.FirstName.ToString()+ " will delete from the system.","Delete",
+                    MessageBoxButton.OKCancel,MessageBoxImage.Warning);
+                switch (Result)
+                {
+                    case MessageBoxResult.None:
 
-                //To get the item's id.
-                int SeletctedItemId = lldata.GetId(selectedItem);
-                //To delete item by id.
-                lldata.DeleteById(SeletctedItemId);
-                
-                MessageBox.Show("Delete is done.");
-                DataGridLandlord.ItemsSource = new LandlordModelView<LandlordData>().GetAllData;
+                        break;
+                    case MessageBoxResult.OK:
+                        //To get the item's id.
+                        int SeletctedItemId = lldata.GetId(selectedItem);
+                        //To delete item by id.
+                        lldata.DeleteById(SeletctedItemId);
 
+                        MessageBox.Show("Delete is done.");
+                        DataGridLandlord.ItemsSource = new LandlordModelView<LandlordData>().GetAllData;
+                        break;
+                    case MessageBoxResult.Cancel:
+                        break;
+                    default:
+                        break;
+                }
             }
             catch (Exception)
             {

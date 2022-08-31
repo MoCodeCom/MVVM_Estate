@@ -31,7 +31,7 @@ namespace Estate.View.Pages.SubPages.Landlord
         public Search()
         {
             InitializeComponent();
-            DataGridLandlord.ItemsSource = lldata.GetAllLandlords();
+            DataGridLandlord.ItemsSource = lldata.GetAll();
             
         }
         
@@ -64,16 +64,17 @@ namespace Estate.View.Pages.SubPages.Landlord
 
         public void Dsort()
         {
-            //var DESCsortGrid = lldata.landlordlist().OrderByDescending(x => x.FirstName.ToLower());
-            var DESCsortGrid = lldata.GetAll_1("Default", "ASC");
+            
+            
+            var DESCsortGrid = lldata.GetAll().OrderByDescending(x => x.FirstName.ToLower());
             DataGridLandlord.ItemsSource = null;
             DataGridLandlord.ItemsSource = DESCsortGrid;
         }
 
         public void Asort()
         {
-            var ASCsortGrid = lldata.GetAll_1("Default", "DESC");
-            //var ASCsort = lldata.landlordlist().OrderBy(x => x.FirstName.ToLower());
+            
+            var ASCsortGrid = lldata.GetAll().OrderBy(x => x.FirstName.ToLower());
             DataGridLandlord.ItemsSource = null;
             DataGridLandlord.ItemsSource = ASCsortGrid;
         }

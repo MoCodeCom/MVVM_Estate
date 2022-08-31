@@ -23,7 +23,7 @@ namespace Estate.ModelView
             set { _GetAll = value; }
         }
 
-        public void Add()
+        public void Add(PropertyData item)
         {
             throw new NotImplementedException();
         }

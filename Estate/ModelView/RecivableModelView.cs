@@ -29,7 +29,7 @@ namespace Estate.ModelView
             }
         }
 
-        public void Add()
+        public void Add(RecivableData item)
         {
             throw new NotImplementedException();
         }

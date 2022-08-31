@@ -60,6 +60,7 @@ namespace Estate.View.Pages.SubPages.Landlord
 
         private void DataGridLandlordEdit_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            btnSave.IsEnabled = true;
             var ItemLandlord = DataGridLandlordEdit.SelectedItem as LandlordData;
             if (ItemLandlord != null)
             {
@@ -111,26 +112,38 @@ namespace Estate.View.Pages.SubPages.Landlord
                     Address = addressData
 
                 };
-                //MessageBox.Show(landlordData.Phone +" -- "+ landlordData.FirstName +" -- "+ landlordData.Address.PostCode +" - id : " +lldata.GetId(landlordData) );
 
-                //LandlordData check = lldata.GetById(lldata.GetId(landlordData));
-
-                LandlordData check = lldata.GetById(landlordIdindt);
-
-                // To check the enteries to updated..
-                if (check.Phone == txtPhone.Text || !lldata.checkPhoneExists(landlordData) &&
-                   TestContent.IsValidPhone(txtPhone.Text))
+                MessageBoxResult result = MessageBox.Show("Are you sure to update landlord information in system?",
+                    "Update",MessageBoxButton.OKCancel,MessageBoxImage.Warning);
+                switch (result)
                 {
-                    //lldata.UpdateByIdLandlord(newPhone=txtPhone.Text, landlordData, addressData);
-                    lldata.UpdateById(landlordData);
-                    DataGridLandlordEdit.ItemsSource = lldata.GetAllData;
-                    Clear();
-                    MessageBox.Show("Update data is done.");
+                    case MessageBoxResult.None:
+                        break;
+                    case MessageBoxResult.OK:
+                        LandlordData check = lldata.GetById(landlordIdindt);
+
+                        // To check the enteries to updated..
+                        if (check.Phone == txtPhone.Text || !lldata.checkPhoneExists(landlordData) &&
+                           TestContent.IsValidPhone(txtPhone.Text))
+                        {
+
+                            lldata.UpdateById(landlordData);
+                            DataGridLandlordEdit.ItemsSource = lldata.GetAllData;
+                            Clear();
+                            MessageBox.Show("Update data is done.", "Update");
+                            btnSave.IsEnabled = false;
+                        }
+                        else
+                        {
+                            MessageBox.Show("The phone number is exist already,\n Or it is written in wrong way!","Warning");
+                        }
+                        break;
+                    case MessageBoxResult.Cancel:
+                        break;
+                    default:
+                        break;
                 }
-                else
-                {
-                    MessageBox.Show("The phone number is exist already,\n Or it is written in wrong way!");
-                }
+                
 
             }
             catch(Exception ex)

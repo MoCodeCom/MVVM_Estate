@@ -1,6 +1,7 @@
 ﻿using Estate.Model.Data;
 using Estate.Model.Interface;
 using Estate.ModelView;
+using Estate.View.Pages.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,7 @@ namespace Estate.View.Pages.SubPages.Landlord
     /// </summary>
     public partial class Add : Page
     {
+        LandlordModelView<LandlordData> llMV = new LandlordModelView<LandlordData>();
         public Add()
         {
             InitializeComponent();
@@ -33,6 +35,8 @@ namespace Estate.View.Pages.SubPages.Landlord
             Clear();
         }
 
+        
+            
         public enum contries
         {
             UnitedKingdom,Afghanistan, Albania, Algeria, Andorra, Angola, AntiguaandBarbuda, Argentina,
@@ -68,7 +72,7 @@ namespace Estate.View.Pages.SubPages.Landlord
             try
             {
 
-                LandlordModelView<LandlordData> ll = new LandlordModelView<LandlordData>();
+                
                 if (tbfname.Text == "" && tblname.Text == "" && tbPhone.Text =="" &&tbEmail.Text =="" )
                 {
                     Reject();
@@ -77,26 +81,33 @@ namespace Estate.View.Pages.SubPages.Landlord
                 {
                     if (tbfname.Text != "" && tblname.Text != "" && tbPhone.Text != "" && tbEmail.Text != "")
                     {
-                        LandlordData datalandlord = new LandlordData()
+
+                        LandlordData lld = new LandlordData()
                         {
                             FirstName = tbfname.Text,
                             LastName = tblname.Text,
                             Phone = tbPhone.Text,
-                            Email = tbEmail.Text
-
+                            Email = tbEmail.Text,
+                            Address = new AddressData()
+                            {
+                                LineOne = tbLineOne.Text,
+                                LineTwo = tbLineTwo.Text,
+                                PostCode = tbPostCode.Text,
+                                City = tbCity.Text,
+                                Country = cbCountries.Text
+                            }
                         };
-                        AddressData dataaddress = new AddressData()
+
+                        if (!llMV.checkPhoneExists(lld))
                         {
-                            LineOne = tbLineOne.Text,
-                            LineTwo = tbLineTwo.Text,
-                            PostCode = tbPostCode.Text,
-                            City = tbCity.Text,
-                            Country = cbCountries.Text
-                        };
-
-                        ll.Add_1(datalandlord, dataaddress);
-                        MessageBox.Show("The adding is done successfully.");
-                        Clear();
+                            llMV.Add(lld);
+                            MessageBox.Show("The adding is done successfully.","Add");
+                            Clear();
+                        }
+                        else
+                        {
+                            MessageBox.Show("The phone number is exist already!","Error");
+                        }
                     }
                     Reject();
                 }
@@ -181,7 +192,7 @@ namespace Estate.View.Pages.SubPages.Landlord
                 errPhone.Visibility == Visibility.Visible
                 )
             {
-                MessageBox.Show("Please re-enter information with red star.");
+                MessageBox.Show("Please re-enter information with red star.", "Alert",MessageBoxButton.OK,MessageBoxImage.Error);
             }
         }
     }

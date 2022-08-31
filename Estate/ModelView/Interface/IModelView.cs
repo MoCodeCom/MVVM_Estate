@@ -11,7 +11,7 @@ namespace Estate.ModelView.Interface
     {
         List<T> GetAll();
         T GetById(int id);
-        void Add();
+        void Add(T item);
         void DeleteById(int id);
         void DeleteAll();
         void UpdateById(T item);
