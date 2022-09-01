@@ -101,7 +101,7 @@ namespace Estate.View.Pages.SubPages.Landlord
                         break;
                     case MessageBoxResult.OK:
                         //To get the item's id.
-                        int SeletctedItemId = lldata.GetId(selectedItem);
+                        int SeletctedItemId = Convert.ToInt32( lldata.GetId(selectedItem));
                         //To delete item by id.
                         lldata.DeleteById(SeletctedItemId);
 

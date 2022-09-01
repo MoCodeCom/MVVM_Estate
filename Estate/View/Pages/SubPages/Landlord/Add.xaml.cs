@@ -1,6 +1,7 @@
 ﻿using Estate.Model.Data;
 using Estate.Model.Interface;
 using Estate.ModelView;
+using Estate.ModelView.Classes;
 using Estate.View.Pages.Classes;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,7 @@ namespace Estate.View.Pages.SubPages.Landlord
     public partial class Add : Page
     {
         LandlordModelView<LandlordData> llMV = new LandlordModelView<LandlordData>();
+        CheckPhone<LandlordData> checkPhone = new CheckPhone<LandlordData>();
         public Add()
         {
             InitializeComponent();
@@ -98,7 +100,8 @@ namespace Estate.View.Pages.SubPages.Landlord
                             }
                         };
 
-                        if (!llMV.checkPhoneExists(lld))
+                        //if (!llMV.checkPhoneExists(lld))
+                        if(!checkPhone.checkPhoneExists(lld, "LandlordTable"))
                         {
                             llMV.Add(lld);
                             MessageBox.Show("The adding is done successfully.","Add");

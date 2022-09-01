@@ -165,4 +165,79 @@ namespace Estate
             return li;
         }
      */
+
+    /*
+        public int GetLastId()
+        {
+            int idCount = 0;
+            conStr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
+            string CommandString = "SELECT id FROM LandlordTable ORDER BY id DESC LIMIT 1;";
+            try
+            {
+                SQLiteConnection conn = new SQLiteConnection(conStr);
+                SQLiteDataAdapter adId = new SQLiteDataAdapter(CommandString, conn);
+                DataTable dt = new DataTable();
+
+                adId.Fill(dt);
+                idCount = Convert.ToInt32(dt.Rows[0][0]);
+                
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+
+            return idCount;
+        }*/
+
+    /*
+public int GetIdByPhone(string phoneStr)
+{
+    int id = 0;
+    conStr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
+    string commandid =
+        "SELECT id FROM LandlordTable WHERE phone='" + phoneStr + "';";
+    try
+    {
+        SQLiteConnection conId = new SQLiteConnection(conStr);
+        SQLiteDataAdapter ad = new SQLiteDataAdapter(commandid, conId);
+        DataTable dt = new DataTable();
+        ad.Fill(dt);
+        for (int i = 0; i < dt.Rows.Count; i++)
+        {
+            id = Convert.ToInt32(dt.Rows[i][0]);
+        }
+    }
+    catch (Exception e)
+    {
+        MessageBox.Show(e.Message);
+    }
+    return id;
+}*/
+
+    //To check whether the Landlord property is exist already?
+    /*
+    public bool checkPhoneExists(LandlordData lld)
+    {
+        bool result = false;
+        conStr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
+        string CommandString = "SELECT * FROM LandlordTable WHERE phone = '" + lld.Phone + "'";
+        try
+        {
+
+            SQLiteConnection con = new SQLiteConnection(conStr);
+            SQLiteDataAdapter adlandlord = new SQLiteDataAdapter(CommandString, con);
+            DataTable dt = new DataTable();
+            adlandlord.Fill(dt);
+            result = dt.Rows.Count > 0 ? true : false;
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message);
+
+        }
+        return result;
+    }
+    */
 }

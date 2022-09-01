@@ -16,7 +16,7 @@ namespace Estate.ModelView
         {
             _GetAllData = GetAll();
         }
-
+        
         public List<PaymentData> GetAllData 
         { 
             get { return _GetAllData; }
@@ -109,5 +109,7 @@ namespace Estate.ModelView
         {
             throw new NotImplementedException();
         }
+
+   
     }
 }

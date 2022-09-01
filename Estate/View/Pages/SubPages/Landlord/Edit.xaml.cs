@@ -1,6 +1,7 @@
 ﻿using Estate.Model.Data;
 using Estate.Model.Interface;
 using Estate.ModelView;
+using Estate.ModelView.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,7 @@ namespace Estate.View.Pages.SubPages.Landlord
     public partial class Edit : Page
     {
         LandlordModelView<LandlordData> lldata = new LandlordModelView<LandlordData>();
+        CheckPhone<LandlordData> checkPhone = new CheckPhone<LandlordData>();
         LandlordData landlordData;
         AddressData addressData;
         public int landlordIdindt;
@@ -123,7 +125,8 @@ namespace Estate.View.Pages.SubPages.Landlord
                         LandlordData check = lldata.GetById(landlordIdindt);
 
                         // To check the enteries to updated..
-                        if (check.Phone == txtPhone.Text || !lldata.checkPhoneExists(landlordData) &&
+                        //if (check.Phone == txtPhone.Text || !lldata.checkPhoneExists(landlordData) &&
+                        if(check.Phone == txtPhone.Text || !checkPhone.checkPhoneExists(landlordData, "LandlordTable") &&
                            TestContent.IsValidPhone(txtPhone.Text))
                         {
 

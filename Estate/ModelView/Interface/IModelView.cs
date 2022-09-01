@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Estate.ModelView.Interface
 {
-    public interface IModelView<T>
+    public interface IModelView <T>
     {
         List<T> GetAll();
         T GetById(int id);
