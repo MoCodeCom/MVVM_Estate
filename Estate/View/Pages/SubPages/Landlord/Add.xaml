@@ -90,7 +90,7 @@
                     <Label>Phone</Label>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock x:Name="errPhone" Foreground="Red" FontSize="20" Visibility="Hidden">*</TextBlock>
-                        <TextBox x:Name="tbPhone"></TextBox>
+                        <TextBox x:Name="tbPhone" MaxLength="11"></TextBox>
                     </StackPanel>
 
                     <Label>Email</Label>

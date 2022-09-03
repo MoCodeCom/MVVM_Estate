@@ -92,7 +92,7 @@
                 <GroupBox Header="Contact" Grid.Column="1" Grid.RowSpan="2">
                     <StackPanel>
                         <Label>Phone</Label>
-                        <TextBox x:Name="txtPhone"></TextBox>
+                        <TextBox x:Name="txtPhone" MaxLength="11"></TextBox>
                         <Label>Email</Label>
                         <TextBox x:Name="txtEmail"></TextBox>
                     </StackPanel>

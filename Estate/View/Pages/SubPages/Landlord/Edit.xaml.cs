@@ -24,16 +24,18 @@ namespace Estate.View.Pages.SubPages.Landlord
     /// </summary>
     public partial class Edit : Page
     {
+        
         LandlordModelView<LandlordData> lldata = new LandlordModelView<LandlordData>();
         CheckPhone<LandlordData> checkPhone = new CheckPhone<LandlordData>();
-        LandlordData landlordData;
+        private LandlordData landlordData;
         AddressData addressData;
         public int landlordIdindt;
-        
+        private GetIdByData<LandlordData> Getid= new GetIdByData<LandlordData>();
+       
         public Edit()
         {
             InitializeComponent();
-            DataGridLandlordEdit.ItemsSource = lldata.GetAllData;
+            DataGridLandlordEdit.ItemsSource = lldata.GetAll();
             Clear();
         }
 
@@ -41,7 +43,7 @@ namespace Estate.View.Pages.SubPages.Landlord
         {
             if (tb.Text != "")
             {
-                var filterLandlord = lldata.GetAllData.Where(x =>
+                var filterLandlord = lldata.GetAll().Where(x =>
                 x.FirstName.ToLower().Contains(tb.Text.ToLower()) ||
                 x.LastName.ToLower().Contains(tb.Text.ToLower()) 
 
@@ -51,7 +53,7 @@ namespace Estate.View.Pages.SubPages.Landlord
             }
             else
             {
-                DataGridLandlordEdit.ItemsSource = new LandlordModelView<LandlordData>().GetAllData;
+                DataGridLandlordEdit.ItemsSource = new LandlordModelView<LandlordData>().GetAll();
             }
         }
         private void FilterContent_TextChanged(object sender, TextChangedEventArgs e)
@@ -62,14 +64,16 @@ namespace Estate.View.Pages.SubPages.Landlord
 
         private void DataGridLandlordEdit_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            //Activate save Button
             btnSave.IsEnabled = true;
             var ItemLandlord = DataGridLandlordEdit.SelectedItem as LandlordData;
             if (ItemLandlord != null)
             {
                 string NameStr = ItemLandlord.FirstName.ToLower();
-                var i = lldata.GetAllData.Where(x => x.FirstName.ToLower() == NameStr);
+                var i = lldata.GetAll().Where(x => x.FirstName.ToLower() == NameStr);
+                //Get landlord id in database
                 landlordIdindt = lldata.GetId(ItemLandlord);
-                
+
                 foreach (var items in i)
                 {
                     txtFristName.Text = items.FirstName;
@@ -84,7 +88,6 @@ namespace Estate.View.Pages.SubPages.Landlord
                     break;
                 }
             }
-            
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -114,7 +117,7 @@ namespace Estate.View.Pages.SubPages.Landlord
                     Address = addressData
 
                 };
-
+                
                 MessageBoxResult result = MessageBox.Show("Are you sure to update landlord information in system?",
                     "Update",MessageBoxButton.OKCancel,MessageBoxImage.Warning);
                 switch (result)
@@ -123,15 +126,14 @@ namespace Estate.View.Pages.SubPages.Landlord
                         break;
                     case MessageBoxResult.OK:
                         LandlordData check = lldata.GetById(landlordIdindt);
-
+                        
                         // To check the enteries to updated..
                         //if (check.Phone == txtPhone.Text || !lldata.checkPhoneExists(landlordData) &&
                         if(check.Phone == txtPhone.Text || !checkPhone.checkPhoneExists(landlordData, "LandlordTable") &&
                            TestContent.IsValidPhone(txtPhone.Text))
                         {
-
                             lldata.UpdateById(landlordData);
-                            DataGridLandlordEdit.ItemsSource = lldata.GetAllData;
+                            DataGridLandlordEdit.ItemsSource = lldata.GetAll();
                             Clear();
                             MessageBox.Show("Update data is done.", "Update");
                             btnSave.IsEnabled = false;
@@ -174,7 +176,7 @@ namespace Estate.View.Pages.SubPages.Landlord
         }
         public bool CheckPhone(LandlordData lData)
         {
-            return lldata.GetAllData.Contains(lData) ? false : true;
+            return lldata.GetAll().Contains(lData) ? false : true;
         }
     }
 }

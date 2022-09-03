@@ -15,6 +15,7 @@ using Estate.ModelView.CommandStrings;
 using System.Windows;
 using Estate.View.Pages.SubPages.Landlord;
 using Estate.ModelView.Classes;
+using System.Windows.Controls;
 
 namespace Estate.ModelView
 {
@@ -22,28 +23,24 @@ namespace Estate.ModelView
 
     public class LandlordModelView<T> : IModelView<LandlordData>
     {
-        private IList<LandlordData> _GetAll;
-        private LandlordData landlordData;
-        private AddressData addressData;
-        private string conStr;
-        CheckPhone<LandlordData> checkPhone = new CheckPhone<LandlordData>();
 
+        public LandlordData landlordData;
+        public AddressData addressData;
+        CheckPhone<LandlordData> checkPhone = new CheckPhone<LandlordData>();
+        private string connStr = new ConnectionStr().conStr;
+        //private GetIdByData<LandlordData> Getid = new GetIdByData<LandlordData>();
+
+        //**************************************************************************//
         public LandlordModelView()
         {
-            _GetAll = GetAll();
+
             
         }
-
-        public IList<LandlordData> GetAllData { 
-            get { return _GetAll; } 
-            set { _GetAll = value; }
-        }
-
+  
         public async void DeleteAll()
         {
             await Task.Run(() =>
             {
-                conStr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
                 string commandStringAddress = "DELETE FROM AddressTable";
                 string commandStringLandlord = "DELETE FROM LandlordTable";
 
@@ -51,7 +48,7 @@ namespace Estate.ModelView
                 {
 
                     //step --1
-                    SQLiteConnection conn = new SQLiteConnection(conStr);
+                    SQLiteConnection conn = new SQLiteConnection(connStr);
                     SQLiteDataAdapter adAddress = new SQLiteDataAdapter(commandStringAddress, conn);
                     SQLiteDataAdapter adLandlord = new SQLiteDataAdapter(commandStringLandlord, conn);
                     conn.Open();
@@ -73,14 +70,13 @@ namespace Estate.ModelView
 
         public void DeleteById(int id)
         {
-            conStr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
             string commandStringAddress = "DELETE FROM AddressTable WHERE landlord_id = " + id+";";
             string commandStringLandlord = "DELETE FROM LandlordTable WHERE id = " + id+";";
             //string commandString = "DELETE FROM AddressTable, LandlordTable WHERE "
             try
             {
                 //step --1
-                SQLiteConnection conn = new SQLiteConnection(conStr);
+                SQLiteConnection conn = new SQLiteConnection(connStr);
                 SQLiteDataAdapter adAddress = new SQLiteDataAdapter(commandStringAddress, conn);
                 SQLiteDataAdapter adLandlord = new SQLiteDataAdapter(commandStringLandlord, conn);
                 conn.Open();
@@ -105,10 +101,10 @@ namespace Estate.ModelView
 
             List<LandlordData> li = new List<LandlordData>();
 
-            string conStr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
+
             string commandStr = "SELECT * FROM LandlordTable INNER JOIN AddressTable ON LandlordTable.id = AddressTable.landlord_id;";
 
-            SQLiteConnection conn = new SQLiteConnection(conStr);
+            SQLiteConnection conn = new SQLiteConnection(connStr);
             SQLiteDataAdapter da = new SQLiteDataAdapter(commandStr, conn);
             DataTable dt = new DataTable();
             da.Fill(dt);
@@ -140,12 +136,11 @@ namespace Estate.ModelView
         public LandlordData GetById(int id)
         {
             LandlordData lld = new LandlordData();
-            conStr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
 
             string CommandString = "SELECT * FROM LandlordTable WHERE id = "+id+"";
             try
             {
-                SQLiteConnection con = new SQLiteConnection(conStr);
+                SQLiteConnection con = new SQLiteConnection(connStr);
                 SQLiteDataAdapter Landlordad = new SQLiteDataAdapter(CommandString, con);
                 DataTable dt = new DataTable();
                 Landlordad.Fill(dt);
@@ -168,10 +163,10 @@ namespace Estate.ModelView
         
         public void UpdateById(LandlordData item)
         {
-            conStr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
+            
             //pass landlord id by item when it's selected
             int landlordId = item.Id;
-            
+
             string CommandStringLandlord = "UPDATE LandlordTable SET FirstName='" + item.FirstName + "', LastName='" + item.LastName + "'" +
                 ", email='" + item.Email + "', phone='" + item.Phone + "' WHERE id=" + landlordId + ";";
 
@@ -183,7 +178,7 @@ namespace Estate.ModelView
             try
             {
                 //Step -- 1
-                SQLiteConnection conn = new SQLiteConnection(conStr);
+                SQLiteConnection conn = new SQLiteConnection(connStr);
                 SQLiteDataAdapter adAddress = new SQLiteDataAdapter(CommandStringAddress, conn);
                 SQLiteDataAdapter adLandlord = new SQLiteDataAdapter(CommandStringLandlord, conn);
 
@@ -207,10 +202,11 @@ namespace Estate.ModelView
 
         public void Add(LandlordData item)
         {
+            string conStr = connStr;
             //Adding landlord data
             try
             {
-                string conStr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
+                
                 string commandStrLandlord =
                     "INSERT INTO LandlordTable (firstName, lastName,phone,email) VALUES" +
                     "('" + item.FirstName + "','" + item.LastName + "','" + item.Phone + "','" + item.Email + "');";
@@ -237,8 +233,10 @@ namespace Estate.ModelView
             {
                 
                 SQLiteConnection con = new SQLiteConnection(conStr);
+
+                //Get last id count in database by checkphone class.
                 int lastIdCount = Convert.ToInt32(checkPhone.GetIdByPhone(item.Phone, "LandlordTable"));
-                //int lastIdCount = Convert.ToInt32( GetIdByPhone(item.Phone));
+
                 string commandStrAddress = "INSERT INTO AddressTable (lineOne, lineTwo, postcode, city, contry, landlord_id)" +
                     "VALUES ('" + item.Address.LineOne + "','" + item.Address.LineTwo + "','" + item.Address.PostCode + "','" + item.Address.City + "','" + item.Address.Country + "'," + lastIdCount + ");";
 
@@ -258,21 +256,40 @@ namespace Estate.ModelView
         }
 
 
-
-
-
-
-
+        public int GetId(LandlordData landlordDataId)
+        {
+            int id = 0;
+            
+            string commandid =
+                "SELECT id FROM LandlordTable WHERE firstName='" + landlordDataId.FirstName +
+                "' AND lastName='" + landlordDataId.LastName + "' AND phone='" + landlordDataId.Phone + "';";
+            try
+            {
+                SQLiteConnection conId = new SQLiteConnection(connStr);
+                SQLiteDataAdapter ad = new SQLiteDataAdapter(commandid, conId);
+                DataTable dt = new DataTable();
+                ad.Fill(dt);
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    id = Convert.ToInt32(dt.Rows[i][0]);
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            return id;
+        }
         public AddressData GetAddress(LandlordData lld)
         {
-            AddressData addressdata = new AddressData();    
-            conStr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
-            int landlord_ID = Convert.ToInt32( GetId(lld));
+            AddressData addressdata = new AddressData();
+
+            int landlord_ID = Convert.ToInt32(GetId(lld));
             string commStr = "SELECT * FROM AddressTable WHERE landlord_id= " + landlord_ID + "";
 
             try
             {
-                SQLiteConnection conn = new SQLiteConnection(conStr);
+                SQLiteConnection conn = new SQLiteConnection(connStr);
                 SQLiteDataAdapter ad = new SQLiteDataAdapter(commStr, conn);
                 DataTable dt = new DataTable();
 
@@ -288,41 +305,14 @@ namespace Estate.ModelView
                         City = dt.Rows[r][4].ToString(),
                         Country = dt.Rows[r][5].ToString()
                     };
-                }                
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            
+
             return addressdata;
         }
-        
-        //To get the int id by the landlord property.
-        public int GetId(LandlordData landlordDataId)
-        {
-            int id=0;
-            conStr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
-            string commandid =
-                "SELECT id FROM LandlordTable WHERE firstName='" + landlordDataId.FirstName +
-                "' AND lastName='" + landlordDataId.LastName + "' AND phone='" + landlordDataId.Phone + "';";
-            try
-            {
-                SQLiteConnection conId = new SQLiteConnection(conStr);
-                SQLiteDataAdapter ad = new SQLiteDataAdapter(commandid, conId);
-                DataTable dt = new DataTable();
-                ad.Fill(dt);
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    id = Convert.ToInt32(dt.Rows[i][0]);
-                }
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
-            return id;
-        }
-
     }
 }

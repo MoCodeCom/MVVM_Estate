@@ -1,4 +1,7 @@
-﻿using Estate.View.Pages.SubPages.Landlord;
+﻿using Estate.Model.Data;
+using Estate.ModelView.Classes;
+using Estate.ModelView;
+using Estate.View.Pages.SubPages.Landlord;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +17,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static Estate.View.Pages.SubPages.Landlord.Add;
+using System.Text.RegularExpressions;
+using Estate.Model.Interface;
 
 namespace Estate.View.Pages.SubPages.Tenant
 {
@@ -22,10 +27,13 @@ namespace Estate.View.Pages.SubPages.Tenant
     /// </summary>
     public partial class AddTenant : Page
     {
+        TenantModelView<TenantData> llMV = new TenantModelView<TenantData>();
+        CheckPhone<TenantData> checkPhone = new CheckPhone<TenantData>();
         public AddTenant()
         {
             InitializeComponent();
             cbCountries.ItemsSource = Enum.GetValues(typeof(contries)).Cast<contries>();
+            Clear();
         }
 
         public enum contries
@@ -60,7 +68,79 @@ namespace Estate.View.Pages.SubPages.Tenant
 
         private void btnSave_Button_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
 
+
+                if (tbfname.Text == "" && tblname.Text == "" && tbPhone.Text == "" && tbEmail.Text == "")
+                {
+                    Reject();
+                }
+                else
+                {
+                    if (tbfname.Text != "" && tblname.Text != "" && tbPhone.Text != "" && tbEmail.Text != "")
+                    {
+
+                        TenantData ttd = new TenantData()
+                        {
+                            FirstName = tbfname.Text,
+                            LastName = tblname.Text,
+                            Phone = tbPhone.Text,
+                            Email = tbEmail.Text,
+                            Address = new AddressData()
+                            {
+                                LineOne = tbLineOne.Text,
+                                LineTwo = tbLineTwo.Text,
+                                PostCode = tbPostCode.Text,
+                                City = tbCity.Text,
+                                Country = cbCountries.Text
+                            }
+                        };
+
+                        //if (!llMV.checkPhoneExists(lld))
+                        if (!checkPhone.checkPhoneExists(ttd, "TenantTable"))
+                        {
+                            llMV.Add(ttd);
+                            MessageBox.Show("The adding is done successfully.", "Add");
+                            Clear();
+                        }
+                        else
+                        {
+                            MessageBox.Show("The phone number is exist already!", "Error");
+                        }
+                    }
+                    Reject();
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        private void btnClear_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Clear();
+        }
+
+        public void Clear()
+        {
+            tbfname.Text = "";
+            tblname.Text = "";
+            tbLineOne.Text = "";
+            tbLineTwo.Text = "";
+            tbPostCode.Text = "";
+            tbCity.Text = "";
+            cbCountries.Text = "UnitedKingdom";
+            tbPhone.Text = "";
+            tbEmail.Text = "";
+            tbfname.Focus();
+        }
+        public void Reject()
+        {
             bool emailInspactor = TestContent.IsValidEmailAddress(tbEmail.Text);
             bool fnInspactor = TestContent.IsValidName(tbfname.Text);
             bool lnInspactor = TestContent.IsValidName(tblname.Text);
@@ -112,30 +192,31 @@ namespace Estate.View.Pages.SubPages.Tenant
                 errPhone.Visibility == Visibility.Visible
                 )
             {
-                MessageBox.Show("Please re-enter information with red star.");
+                MessageBox.Show("Please re-enter information with red star.", "Alert", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
+    }
 
-        private void btnClear_Button_Click(object sender, RoutedEventArgs e)
+
+    public static class TestContent
+    {
+        public static bool IsValidEmailAddress(string emailStr)
         {
-            tbfname.Text = "";
-            tblname.Text = "";
-            tbLineOne.Text = "";
-            tbLineTwo.Text = "";
-            tbPostCode.Text = "";
-            tbCity.Text = "";
-            cbCountries.Text = "UnitedKingdom";
-            tbPhone.Text = "";
-            tbEmail.Text = "";
-
-            errEmail.Visibility = Visibility.Hidden;
-            errFname.Visibility = Visibility.Hidden;
-            errLname.Visibility = Visibility.Hidden;
-            errPhone.Visibility = Visibility.Hidden;
+            Regex r = new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
+            return r.IsMatch(emailStr);
         }
 
+        public static bool IsValidName(string name)
+        {
+            Regex n = new Regex("^[A-Za-z]{1,20}$");
+            return n.IsMatch(name);
+        }
 
-
+        public static bool IsValidPhone(string phone)
+        {
+            Regex n = new Regex("^[0-9]{11}$");
+            return n.IsMatch(phone);
+        }
     }
 }

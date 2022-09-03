@@ -43,9 +43,9 @@
                       MouseDoubleClick="DataGridTenantEdit_MouseDoubleClick" 
                       >
                 <DataGrid.Columns>
-                    <DataGridTextColumn x:Name="AscDsc" SortMemberPath="FirstName" 
-                                        Header="FirstName" Binding="{Binding FirstName}" Width="100"/>
+                    <DataGridTextColumn Header="FirstName" Binding="{Binding FirstName}" Width="100"/>
                     <DataGridTextColumn Header="LastName" Binding="{Binding LastName}" Width="100"/>
+                    <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" Width="100"/>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
@@ -98,7 +98,7 @@
                 </GroupBox>
                 <GroupBox Grid.Column="1" Grid.Row="1">
                     <StackPanel Margin="0,10,0,0">
-                        <Button x:Name="btnSave" Content="Save" ></Button>
+                        <Button x:Name="btnSave" Content="Save" IsEnabled="False" Click="btnSave_Click"></Button>
                         <Button x:Name="btnClear" Content="Clear" ></Button>
                     </StackPanel>
                 </GroupBox>

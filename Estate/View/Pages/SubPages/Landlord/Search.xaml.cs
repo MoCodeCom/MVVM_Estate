@@ -39,7 +39,7 @@ namespace Estate.View.Pages.SubPages.Landlord
         {
             if (tb.Text != "")
             {
-                var filterLandlord = lldata.GetAllData.Where(x => 
+                var filterLandlord = lldata.GetAll().Where(x => 
                 x.FirstName.ToLower().Contains(tb.Text.ToLower()) ||
                 x.LastName.ToLower().Contains(tb.Text.ToLower()) ||
                 x.Address.PostCode.ToLower().Contains(tb.Text.ToLower())||
@@ -52,7 +52,7 @@ namespace Estate.View.Pages.SubPages.Landlord
             }
             else
             {
-                DataGridLandlord.ItemsSource = new LandlordModelView<LandlordData>().GetAllData;
+                DataGridLandlord.ItemsSource = new LandlordModelView<LandlordData>().GetAll();
             }
         }
         private void FilterContent_TextChanged(object sender, TextChangedEventArgs e)

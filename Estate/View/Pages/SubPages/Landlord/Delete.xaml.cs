@@ -1,5 +1,6 @@
 ﻿using Estate.Model.Data;
 using Estate.ModelView;
+using Estate.ModelView.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,18 +23,21 @@ namespace Estate.View.Pages.SubPages.Landlord
     /// </summary>
     public partial class Delete : Page
     {
+        private static LandlordData landlordData;
         LandlordModelView<LandlordData> lldata = new LandlordModelView<LandlordData>();
+       
+        
         public Delete()
         {
             InitializeComponent();
-            DataGridLandlord.ItemsSource = new LandlordModelView<LandlordData>().GetAllData;
+            DataGridLandlord.ItemsSource = new LandlordModelView<LandlordData>().GetAll();
         }
 
         private void Filter(TextBox tb)
         {
             if (tb.Text != "")
             {
-                var filterLandlord = lldata.GetAllData.Where(x =>
+                var filterLandlord = lldata.GetAll().Where(x =>
                 x.FirstName.ToLower().Contains(tb.Text.ToLower()) ||
                 x.LastName.ToLower().Contains(tb.Text.ToLower()) ||
                 x.Address.PostCode.ToLower().Contains(tb.Text.ToLower()) ||
@@ -46,7 +50,7 @@ namespace Estate.View.Pages.SubPages.Landlord
             }
             else
             {
-                DataGridLandlord.ItemsSource = new LandlordModelView<LandlordData>().GetAllData;
+                DataGridLandlord.ItemsSource = new LandlordModelView<LandlordData>().GetAll();
             }
         }
         private void FilterContent_TextChanged(object sender, TextChangedEventArgs e)
@@ -71,7 +75,7 @@ namespace Estate.View.Pages.SubPages.Landlord
                         lldata.DeleteAll();
 
                         MessageBox.Show("Delete is done.");
-                        DataGridLandlord.ItemsSource = new LandlordModelView<LandlordData>().GetAllData;
+                        DataGridLandlord.ItemsSource = new LandlordModelView<LandlordData>().GetAll();
                         break;
                     case MessageBoxResult.Cancel:
                         break;
@@ -101,12 +105,13 @@ namespace Estate.View.Pages.SubPages.Landlord
                         break;
                     case MessageBoxResult.OK:
                         //To get the item's id.
-                        int SeletctedItemId = Convert.ToInt32( lldata.GetId(selectedItem));
+                        //int SeletctedItemId = Convert.ToInt32( lldata.GetId(selectedItem));
+                        int SeletctedItemId = Convert.ToInt32(lldata.GetId(selectedItem));
                         //To delete item by id.
                         lldata.DeleteById(SeletctedItemId);
 
                         MessageBox.Show("Delete is done.");
-                        DataGridLandlord.ItemsSource = new LandlordModelView<LandlordData>().GetAllData;
+                        DataGridLandlord.ItemsSource = new LandlordModelView<LandlordData>().GetAll();
                         break;
                     case MessageBoxResult.Cancel:
                         break;

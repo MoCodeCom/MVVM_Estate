@@ -13,15 +13,16 @@ namespace Estate.ModelView.Classes
 {
     public class CheckPhone<T>
     {
+        private string ConnString = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
         public bool checkPhoneExists(T lld, string tableName)
         {
             bool result = false;
-            string constr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
+            //string constr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
             string CommandString = "SELECT * FROM "+tableName+" WHERE phone = '" + lld+".Phone" + "';";
             try
             {
 
-                SQLiteConnection con = new SQLiteConnection(constr);
+                SQLiteConnection con = new SQLiteConnection(ConnString);
                 SQLiteDataAdapter adlandlord = new SQLiteDataAdapter(CommandString, con);
                 DataTable dt = new DataTable();
                 adlandlord.Fill(dt);
@@ -30,7 +31,6 @@ namespace Estate.ModelView.Classes
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-
             }
             return result;
         }
@@ -38,12 +38,12 @@ namespace Estate.ModelView.Classes
         public int GetIdByPhone(string phoneStr, string tableName)
         {
             int id = 0;
-            string constr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
+            //string constr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
             string commandid =
                 "SELECT id FROM "+tableName+" WHERE phone='" + phoneStr + "';";
             try
             {
-                SQLiteConnection conId = new SQLiteConnection(constr);
+                SQLiteConnection conId = new SQLiteConnection(ConnString);
                 SQLiteDataAdapter ad = new SQLiteDataAdapter(commandid, conId);
                 DataTable dt = new DataTable();
                 ad.Fill(dt);

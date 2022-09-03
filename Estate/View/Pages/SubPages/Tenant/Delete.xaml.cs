@@ -22,24 +22,23 @@ namespace Estate.View.Pages.SubPages.Tenant
     /// </summary>
     public partial class Delete : Page
     {
-        TenantModelView<TenantData> Tenantdata = new TenantModelView<TenantData>();
+        private TenantData tenantData;
+        TenantModelView<TenantData> ttd = new TenantModelView<TenantData>();
         public Delete()
         {
             InitializeComponent();
-            DataGridTenant.ItemsSource = new TenantModelView<TenantData>().GetAllData;
+            DataGridTenant.ItemsSource = new TenantModelView<TenantData>().GetAll();
         }
 
-        
-        
 
         private void Filter(TextBox tb)
         {
             if (tb.Text != "")
             {
-                var filterTenant = Tenantdata.GetAllData.Where(x =>
+                var filterTenant = ttd.GetAll().Where(x =>
                 x.FirstName.ToLower().Contains(tb.Text.ToLower()) ||
                 x.LastName.ToLower().Contains(tb.Text.ToLower()) ||
-                x.PostCode.ToLower().Contains(tb.Text.ToLower()) ||
+                x.Address.PostCode.ToLower().Contains(tb.Text.ToLower()) ||
                 x.Phone.ToLower().Contains(tb.Text.ToLower()) ||
                 x.Email.ToLower().Contains(tb.Text.ToLower())
 
@@ -49,7 +48,7 @@ namespace Estate.View.Pages.SubPages.Tenant
             }
             else
             {
-                DataGridTenant.ItemsSource = new TenantModelView<TenantData>().GetAllData;
+                DataGridTenant.ItemsSource = new TenantModelView<TenantData>().GetAll();
             }
         }
         private void FilterContent_TextChanged(object sender, TextChangedEventArgs e)
@@ -59,9 +58,35 @@ namespace Estate.View.Pages.SubPages.Tenant
             Filter(txtbox);
         }
 
-        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        private void btnDeleteAll_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Are you sure to delete all landlords details in the system?");
+            MessageBoxResult Result = MessageBox.Show("Are you sure to delete all Tenants details from the system?", "Delete All",
+                MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+            try
+            {
+                switch (Result)
+                {
+                    case MessageBoxResult.None:
+                        break;
+                    case MessageBoxResult.OK:
+                        //To delete all details form database.
+                        ttd.DeleteAll();
+
+                        MessageBox.Show("Delete is done.");
+                        DataGridTenant.ItemsSource = new TenantModelView<TenantData>().GetAll();
+                        break;
+                    case MessageBoxResult.Cancel:
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void DeleteItem_Click(object sender, RoutedEventArgs e)
@@ -69,13 +94,28 @@ namespace Estate.View.Pages.SubPages.Tenant
             try
             {
                 var selectedItem = DataGridTenant.SelectedItem as TenantData;
-                MessageBox.Show(selectedItem.FirstName.ToString() + " will deleted");
-                string fullname = (selectedItem.FirstName + selectedItem.LastName).ToString();
+                MessageBoxResult Result = MessageBox.Show(selectedItem.FirstName.ToString() + " will delete from the system.", "Delete",
+                    MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+                switch (Result)
+                {
+                    case MessageBoxResult.None:
 
+                        break;
+                    case MessageBoxResult.OK:
+                        //To get the item's id.
+                        //int SeletctedItemId = Convert.ToInt32( lldata.GetId(selectedItem));
+                        int SeletctedItemId = Convert.ToInt32(ttd.GetId(selectedItem));
+                        //To delete item by id.
+                        ttd.DeleteById(SeletctedItemId);
 
-                //DataGridTenant.ItemsSource = lldata.DeleteByFullName(fullname);
-
-
+                        MessageBox.Show("Delete is done.");
+                        DataGridTenant.ItemsSource = new TenantModelView<TenantData>().GetAll();
+                        break;
+                    case MessageBoxResult.Cancel:
+                        break;
+                    default:
+                        break;
+                }
             }
             catch (Exception)
             {

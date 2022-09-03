@@ -34,10 +34,9 @@
                       CanUserSortColumns="True" SelectionMode="Single" CanUserAddRows="False"
                       >
                 <DataGrid.Columns>
-                    <DataGridTextColumn x:Name="AscDsc" SortMemberPath="FirstName" 
-                                        Header="FirstName" Binding="{Binding FirstName}" Width="Auto" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="FirstName" Binding="{Binding FirstName}" Width="Auto" IsReadOnly="True"/>
                     <DataGridTextColumn Header="LastName" Binding="{Binding LastName}" Width="Auto" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="PostCode" Binding="{Binding PostCode}" Width="Auto" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="PostCode" Binding="{Binding Address.PostCode}" Width="100" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" Width="Auto" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="Auto" IsReadOnly="True"/>
 
@@ -56,7 +55,7 @@
             <Label Margin="30,0,0,0">Search</Label>
             <TextBox x:Name="FilterContent" Width="200" Height="25" TextChanged="FilterContent_TextChanged"
                       ></TextBox>
-            <Button x:Name="btnDelete" Content="Delete All" Click="btnDelete_Click"></Button>
+            <Button x:Name="btnDelete" Content="Delete All" Click="btnDeleteAll_Click"></Button>
 
         </StackPanel>
     </Grid>

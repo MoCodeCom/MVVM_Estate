@@ -12,7 +12,7 @@ namespace Estate.Model.Interface
         public string LastName { get; set; }
 
         public AddressData Address { get; set; }
-        public string PostCode { get; set; }
+  
         public string Phone { get; set; }
         public string Email { get; set; }
     }

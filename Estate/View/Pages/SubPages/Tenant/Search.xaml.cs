@@ -22,11 +22,11 @@ namespace Estate.View.Pages.SubPages.Tenant
     /// </summary>
     public partial class Search : Page
     {
-        TenantModelView<TenantData> Tedata = new TenantModelView<TenantData>();
+        TenantModelView<TenantData> ttd = new TenantModelView<TenantData>();
         public Search()
         {
             InitializeComponent();
-            DataGridElement.ItemsSource = new TenantModelView<TenantData>().GetAllData;
+            DataGridElement.ItemsSource = new TenantModelView<TenantData>().GetAll();
         }
 
 
@@ -34,10 +34,9 @@ namespace Estate.View.Pages.SubPages.Tenant
         {
             if (tb.Text != "")
             {
-                var filterTenant = Tedata.GetAllData.Where(x =>
+                var filterTenant = ttd.GetAll().Where(x =>
                 x.FirstName.ToLower().Contains(tb.Text.ToLower()) ||
                 x.LastName.ToLower().Contains(tb.Text.ToLower()) ||
-                x.PostCode.ToLower().Contains(tb.Text.ToLower()) ||
                 x.Phone.ToLower().Contains(tb.Text.ToLower()) ||
                 x.Email.ToLower().Contains(tb.Text.ToLower())
 
@@ -47,7 +46,7 @@ namespace Estate.View.Pages.SubPages.Tenant
             }
             else
             {
-                DataGridElement.ItemsSource = new TenantModelView<TenantData>().GetAllData;
+                DataGridElement.ItemsSource = new TenantModelView<TenantData>().GetAll();
             }
         }
         private void FilterContent_TextChanged(object sender, TextChangedEventArgs e)
@@ -59,14 +58,14 @@ namespace Estate.View.Pages.SubPages.Tenant
 
         public void Dsort()
         {
-            var DESCsortGrid = Tedata.GetAllData.OrderByDescending(x => x.FirstName.ToLower());
+            var DESCsortGrid = ttd.GetAll().OrderByDescending(x => x.FirstName.ToLower());
             DataGridElement.ItemsSource = null;
             DataGridElement.ItemsSource = DESCsortGrid;
         }
 
         public void Asort()
         {
-            var ASCsort = Tedata.GetAllData.OrderBy(x => x.FirstName.ToLower());
+            var ASCsort = ttd.GetAll().OrderBy(x => x.FirstName.ToLower());
             DataGridElement.ItemsSource = null;
             DataGridElement.ItemsSource = ASCsort;
         }

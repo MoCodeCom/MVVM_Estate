@@ -240,4 +240,33 @@ public int GetIdByPhone(string phoneStr)
         return result;
     }
     */
+
+    //To get the int id by the landlord property.
+    /*
+    public int GetId(LandlordData landlordDataId)
+    {
+        int id=0;
+        conStr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
+        string commandid =
+            "SELECT id FROM LandlordTable WHERE firstName='" + landlordDataId.FirstName +
+            "' AND lastName='" + landlordDataId.LastName + "' AND phone='" + landlordDataId.Phone + "';";
+        try
+        {
+            SQLiteConnection conId = new SQLiteConnection(conStr);
+            SQLiteDataAdapter ad = new SQLiteDataAdapter(commandid, conId);
+            DataTable dt = new DataTable();
+            ad.Fill(dt);
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                id = Convert.ToInt32(dt.Rows[i][0]);
+            }
+        }
+        catch (Exception e)
+        {
+            MessageBox.Show(e.Message);
+        }
+        return id;
+    }
+
+    */
 }

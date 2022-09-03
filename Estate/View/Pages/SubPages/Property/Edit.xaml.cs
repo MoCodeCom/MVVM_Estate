@@ -51,9 +51,6 @@ namespace Estate.View.Pages.SubPages.Property
             }
         }
 
-
- 
-
         private void Filter(TextBox tb)
         {
             if (tb.Text != "")

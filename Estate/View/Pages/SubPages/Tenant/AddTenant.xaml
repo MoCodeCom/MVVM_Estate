@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Estate.View.Pages.SubPages.Tenant"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="300" d:DesignWidth="500"
       Title="AddTenant">
 
     <Page.Resources>
@@ -16,7 +16,7 @@
             <Setter Property="Width" Value="200"/>
         </Style>
         <Style x:Name="title" TargetType="{x:Type GroupBox}">
-            <Setter Property="FontWeight" Value="DemiBold"></Setter>
+            <Setter Property="FontWeight" Value="Thin"></Setter>
 
         </Style>
         <Style x:Name="btn" TargetType="Button">
@@ -57,31 +57,42 @@
             <GroupBox Header="Address" Margin="10" Padding="10">
                 <StackPanel Width="400">
                     <Label>Line One</Label>
-                    <TextBox x:Name="tbLineOne"></TextBox>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="tbLineOne"></TextBox>
+                    </StackPanel>
+
 
                     <Label>Line Two</Label>
-                    <TextBox x:Name="tbLineTwo"></TextBox>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="tbLineTwo"></TextBox>
+                    </StackPanel>
 
                     <Label>Post Code</Label>
-                    <TextBox x:Name="tbPostCode"></TextBox>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="tbPostCode"></TextBox>
+                    </StackPanel>
 
                     <Label>City</Label>
-                    <TextBox x:Name="tbCity"></TextBox>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="tbCity"></TextBox>
+                    </StackPanel>
 
                     <Label>Country</Label>
-                    <ComboBox x:Name="cbCountries" Height="25" SelectedIndex="0"></ComboBox>
+                    <StackPanel Orientation="Horizontal">
+                        <ComboBox x:Name="cbCountries" Height="25" SelectedIndex="0"></ComboBox>
+                    </StackPanel>
+
                 </StackPanel>
 
             </GroupBox>
         </StackPanel>
-
         <StackPanel Background="Beige" Grid.Column="1" Grid.Row="0">
             <GroupBox Header="Contact" Margin="10" Padding="10">
                 <StackPanel Width="220" >
                     <Label>Phone</Label>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock x:Name="errPhone" Foreground="Red" FontSize="20" Visibility="Hidden">*</TextBlock>
-                        <TextBox x:Name="tbPhone"></TextBox>
+                        <TextBox x:Name="tbPhone" MaxLength="11"></TextBox>
                     </StackPanel>
 
                     <Label>Email</Label>
