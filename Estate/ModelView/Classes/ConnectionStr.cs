@@ -4,15 +4,24 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Estate.ModelView.Classes
 {
-    public class ConnectionStr
+    public  class ConnectionStr
     {
         private string _conStr;
         public ConnectionStr()
         {
-            _conStr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString; ;
+            try
+            {
+                _conStr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+            
         }
 
         public string conStr 

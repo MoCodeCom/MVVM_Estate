@@ -27,7 +27,7 @@ namespace Estate.View.Pages.SubPages.Property
         public Delete()
         {
             InitializeComponent();
-            DataGridProperty.ItemsSource = new PropertyModelView<PropertyData>().GetAllData;
+            DataGridProperty.ItemsSource = new PropertyModelView<PropertyData>().GetAll();
         }
 
 
@@ -35,13 +35,13 @@ namespace Estate.View.Pages.SubPages.Property
         {
             if (tb.Text != "")
             {
-                var filterProperty = Propdata.GetAllData.Where(x =>
-                x.FullName.ToLower().Contains(tb.Text.ToLower()) ||
-                x.LineOne.ToLower().Contains(tb.Text.ToLower())||
-                x.LineTwo.ToLower().Contains(tb.Text.ToLower()) ||
-                x.City.ToLower().Contains(tb.Text.ToLower())||
-                x.Country.ToLower().Contains(tb.Text.ToLower())||
-                x.PostCode.ToLower().Contains(tb.Text.ToLower()) ||
+                var filterProperty = Propdata.GetAll().Where(x =>
+                x.OwnerName.ToLower().Contains(tb.Text.ToLower()) ||
+                x.Address.LineOne.ToLower().Contains(tb.Text.ToLower())||
+                x.Address.LineTwo.ToLower().Contains(tb.Text.ToLower()) ||
+                x.Address.City.ToLower().Contains(tb.Text.ToLower())||
+                x.Address.Country.ToLower().Contains(tb.Text.ToLower())||
+                x.Address.PostCode.ToLower().Contains(tb.Text.ToLower()) ||
                 x.Phone.ToLower().Contains(tb.Text.ToLower())
 
                 );
@@ -50,7 +50,7 @@ namespace Estate.View.Pages.SubPages.Property
             }
             else
             {
-                DataGridProperty.ItemsSource = new PropertyModelView<PropertyData>().GetAllData;
+                DataGridProperty.ItemsSource = new PropertyModelView<PropertyData>().GetAll();
             }
         }
         private void FilterContent_TextChanged(object sender, TextChangedEventArgs e)
@@ -69,8 +69,8 @@ namespace Estate.View.Pages.SubPages.Property
             try
             {
                 var selectedItem = DataGridProperty.SelectedItem as PropertyData;
-                MessageBox.Show(selectedItem.FullName.ToString() + " will deleted");
-                string fullname = (selectedItem.FullName).ToString();
+                MessageBox.Show(selectedItem.OwnerName.ToString() + " will deleted");
+                string fullname = (selectedItem.OwnerName).ToString();
 
 
                 //DataGridProperty.ItemsSource = lldata.DeleteByFullName(fullname);

@@ -25,6 +25,7 @@ namespace Estate.View.Pages.SubPages.Property
         {
             InitializeComponent();
             cbCountries.ItemsSource = Enum.GetValues(typeof(contries)).Cast<contries>();
+            checkOwner();
         }
 
         public enum contries
@@ -75,13 +76,22 @@ namespace Estate.View.Pages.SubPages.Property
                 errFname.Visibility = Visibility.Hidden;
             }
 
+            if (tbPostCode.Text == "")
+            {
+                tbPostCode.Text = "";
+                errPostCode.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                errPostCode.Visibility = Visibility.Hidden;
+            }
 
-            if (errFname.Visibility == Visibility.Visible)
+
+            if (errFname.Visibility == Visibility.Visible || errPostCode.Visibility == Visibility.Visible)
             {
                 MessageBox.Show("Please re-enter information with red star.");
             }
         }
-
 
         private void btnClear_Button_Click(object sender, RoutedEventArgs e)
         {
@@ -96,6 +106,15 @@ namespace Estate.View.Pages.SubPages.Property
 
 
             errFname.Visibility = Visibility.Hidden;
+            errPostCode.Visibility = Visibility.Hidden;
+        }
+
+        private void checkOwner()
+        {
+            if (tbfname.Text != "" )
+            {
+                btnSave.IsEnabled = true;
+            }
         }
 
 

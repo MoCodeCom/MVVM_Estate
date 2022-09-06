@@ -10,12 +10,6 @@ namespace Estate.ModelView.ModelViewData
 {
     public class SqliteData
     {
-        /*
-        public static List<LandlordData> GetLandlordMain
-        {
-            
-        }
-        */
 
         private static string LoadConnectionString(string id="Default")
         {

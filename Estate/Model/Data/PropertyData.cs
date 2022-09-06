@@ -10,13 +10,15 @@ namespace Estate.Model.Data
 {
     public class PropertyData : IPropertyData, INotifyPropertyChanged
     {
-        private string _FullName;
-        private string _LineOne;
-        private string _LineTwo;
-        private string _PostCode;
-        private string _City;
-        private string _Country;
+        private int _id;
+        private string _ownerName;
+        private AddressData _address;
         private string _Phone;
+        private byte[] _image_1;
+        private byte[] _image_2;
+        private byte[] _image_3;
+        private byte[] _image_4;
+        private int _owner_id;
 
         public PropertyData()
         {
@@ -31,57 +33,110 @@ namespace Estate.Model.Data
             */
         }
 
-
-        public string FullName { get; set; }
-        public AddressData Address { get; set; }
-        public string LineOne { 
-            get { return _LineOne; }
-            set {
-                if (_LineOne != value)
+        public int Id
+        {
+            get { return _id; }
+            set
+            {
+                if (_id != value)
                 {
-                    _LineOne = value;
+                    _id = value;
                 }
-                OnPropertyChanged(nameof(_LineOne));
-            
-            } } 
-        public string LineTwo {
-            get { return _LineTwo; } 
-            set {
-                if (_LineTwo != value)
-                {
-                    _LineTwo = value;
-                }
-                OnPropertyChanged(nameof(_LineTwo));
-            } }
-        public string PostCode { 
-            get { return _PostCode; }
-            set {
-                if (_PostCode != value)
-                {
-                    _PostCode = value;
-                }
-                OnPropertyChanged(nameof(_PostCode));
-            
-            } }
-        public string City { 
-            get { return _City; }
-            set { 
-                if (_City != value)
-                {
-                    _City = value;
-                }
-                OnPropertyChanged(nameof(_City));
+                OnPropertyChanged(nameof(_id));
             }
         }
-        public string Country {
-            get { return _Country; }
-            set {
-                if (_Country != value)
+
+
+
+        public string OwnerName 
+        {
+            get { return _ownerName; }
+            set 
+            {
+                if (_ownerName != value)
                 {
-                    _Country = value;
+                    _ownerName = value;
                 }
-                OnPropertyChanged(nameof(_Country));
-            } }
+                OnPropertyChanged(nameof(_ownerName));
+            } 
+        }
+
+        public AddressData Address 
+        {
+            get { return _address; } 
+            set 
+            {
+                if (_address != value)
+                {
+                    _address = value;
+                }
+                OnPropertyChanged(nameof(_address));
+            } 
+        }
+        public byte[] Image_1
+        {
+            get { return _image_1; }
+            set
+            {
+                if (_image_1 != value)
+                {
+                    _image_1 = value;
+                }
+                OnPropertyChanged(nameof(_image_1));
+            }
+        }
+
+        public byte[] Image_2
+        {
+            get { return _image_2; }
+            set
+            {
+                if (_image_2 != value)
+                {
+                    _image_2 = value;
+                }
+                OnPropertyChanged(nameof(_image_2));
+            }
+        }
+
+        public byte[] Image_3
+        {
+            get { return _image_3; }
+            set
+            {
+                if (_image_3 != value)
+                {
+                    _image_3 = value;
+                }
+                OnPropertyChanged(nameof(_image_3));
+            }
+        }
+
+        public byte[] Image_4
+        {
+            get { return _image_4; }
+            set
+            {
+                if (_image_4 != value)
+                {
+                    _image_4 = value;
+                }
+                OnPropertyChanged(nameof(_image_4));
+            }
+        }
+
+        public int Owner_id
+        {
+            get { return _owner_id; }
+            set
+            {
+                if (_owner_id != value)
+                {
+                    _owner_id = value;
+                }
+                OnPropertyChanged(nameof(_owner_id));
+            }
+        }
 
         public string Phone {
             get { return _Phone; }

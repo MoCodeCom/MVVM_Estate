@@ -9,6 +9,11 @@
       Title="HomePage">
 
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel x:Name="connnectionControl" Margin="0,-100,0,0" >
+            <Button x:Name="connectionBtn" Content="Refresh Database connection" Visibility="Hidden"></Button>
+            <Label x:Name="connectionDatabaseState" Visibility="Hidden"></Label>
+        </StackPanel>
+        
         <Image Source="pack://application:,,,/Model/Images/House.png" 
                Width="100" Height="100"></Image>
         <TextBlock FontSize="20" Padding="10" FontWeight="Bold">Manage Property Now Easy</TextBlock>

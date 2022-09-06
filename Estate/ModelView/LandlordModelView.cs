@@ -28,15 +28,12 @@ namespace Estate.ModelView
         public AddressData addressData;
         CheckPhone<LandlordData> checkPhone = new CheckPhone<LandlordData>();
         private string connStr = new ConnectionStr().conStr;
-        //private GetIdByData<LandlordData> Getid = new GetIdByData<LandlordData>();
+        string conStrNormal = "Data Source = ./maindb.db";
+        
 
         //**************************************************************************//
-        public LandlordModelView()
-        {
-
-            
-        }
-  
+        public LandlordModelView(){}
+   
         public async void DeleteAll()
         {
             await Task.Run(() =>
@@ -98,13 +95,13 @@ namespace Estate.ModelView
 
         public List<LandlordData> GetAll()
         {
-
+            if (connStr == null) MessageBox.Show("There is no connection string.");
             List<LandlordData> li = new List<LandlordData>();
 
 
             string commandStr = "SELECT * FROM LandlordTable INNER JOIN AddressTable ON LandlordTable.id = AddressTable.landlord_id;";
 
-            SQLiteConnection conn = new SQLiteConnection(connStr);
+            SQLiteConnection conn = new SQLiteConnection(conStrNormal);
             SQLiteDataAdapter da = new SQLiteDataAdapter(commandStr, conn);
             DataTable dt = new DataTable();
             da.Fill(dt);

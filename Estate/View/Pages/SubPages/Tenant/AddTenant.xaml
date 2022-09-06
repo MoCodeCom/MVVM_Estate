@@ -43,14 +43,16 @@
                 <StackPanel FocusManager.FocusedElement="{Binding ElementName=tbfname}" Width="400" >
                     <Label>First Name</Label>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock x:Name="errFname" Foreground="Red" FontSize="20" Visibility="Hidden">*</TextBlock>
+                        
                         <TextBox x:Name="tbfname"></TextBox>
+                        <TextBlock x:Name="errFname" Foreground="Red" FontSize="20" Visibility="Hidden">*</TextBlock>
                     </StackPanel>
 
                     <Label>Last Name</Label>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock x:Name="errLname" Foreground="Red" FontSize="20" Visibility="Hidden">*</TextBlock>
+                        
                         <TextBox x:Name="tblname"></TextBox>
+                        <TextBlock x:Name="errLname" Foreground="Red" FontSize="20" Visibility="Hidden">*</TextBlock>
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
@@ -91,14 +93,16 @@
                 <StackPanel Width="220" >
                     <Label>Phone</Label>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock x:Name="errPhone" Foreground="Red" FontSize="20" Visibility="Hidden">*</TextBlock>
+                        
                         <TextBox x:Name="tbPhone" MaxLength="11"></TextBox>
+                        <TextBlock x:Name="errPhone" Foreground="Red" FontSize="20" Visibility="Hidden">*</TextBlock>
                     </StackPanel>
 
                     <Label>Email</Label>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock x:Name="errEmail" Foreground="Red" FontSize="20" Visibility="Hidden">*</TextBlock>
+                        
                         <TextBox x:Name="tbEmail"></TextBox>
+                        <TextBlock x:Name="errEmail" Foreground="Red" FontSize="20" Visibility="Hidden">*</TextBlock>
                     </StackPanel>
 
                 </StackPanel>

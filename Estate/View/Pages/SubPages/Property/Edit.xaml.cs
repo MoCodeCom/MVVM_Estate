@@ -26,7 +26,7 @@ namespace Estate.View.Pages.SubPages.Property
         public Edit()
         {
             InitializeComponent();
-            DataGridPorpertyEdit.ItemsSource = Propdata.GetAllData;
+            DataGridPorpertyEdit.ItemsSource = Propdata.GetAll();
         }
 
         private void DataGridPorpertyEdit_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -34,16 +34,16 @@ namespace Estate.View.Pages.SubPages.Property
             var ItemProp = DataGridPorpertyEdit.SelectedItem as PropertyData;
             if (ItemProp != null)
             {
-                string NameStr = ItemProp.FullName.ToLower();
-                var i = Propdata.GetAll().Where(x => x.FullName.ToLower() == NameStr);
+                string NameStr = ItemProp.OwnerName.ToLower();
+                var i = Propdata.GetAll().Where(x => x.OwnerName.ToLower() == NameStr);
                 foreach (var items in i)
                 {
-                    txtFullName.Text = items.FullName;
-                    txtLineOne.Text = items.LineOne;
-                    txtLineTwo.Text = items.LineTwo;
-                    txtCountry.Text = items.Country;
-                    txtCity.Text = items.City;
-                    txtPostCode.Text = items.PostCode;
+                    txtFullName.Text = items.OwnerName;
+                    txtLineOne.Text = items.Address.LineOne;
+                    txtLineTwo.Text = items.Address.LineTwo;
+                    txtCountry.Text = items.Address.Country;
+                    txtCity.Text = items.Address.City;
+                    txtPostCode.Text = items.Address.PostCode;
                     txtPhone.Text = items.Phone;
 
                     break;
@@ -55,9 +55,9 @@ namespace Estate.View.Pages.SubPages.Property
         {
             if (tb.Text != "")
             {
-                var filterTenant = Propdata.GetAllData.Where(x =>
-                x.FullName.ToLower().Contains(tb.Text.ToLower()) ||
-                x.PostCode.ToLower().Contains(tb.Text.ToLower())
+                var filterTenant = Propdata.GetAll().Where(x =>
+                x.OwnerName.ToLower().Contains(tb.Text.ToLower()) ||
+                x.Address.PostCode.ToLower().Contains(tb.Text.ToLower())
 
                 );
                 DataGridPorpertyEdit.ItemsSource = null;
@@ -65,12 +65,11 @@ namespace Estate.View.Pages.SubPages.Property
             }
             else
             {
-                DataGridPorpertyEdit.ItemsSource = new PropertyModelView<PropertyData>().GetAllData;
+                DataGridPorpertyEdit.ItemsSource = new PropertyModelView<PropertyData>().GetAll();
             }
         }
         private void FilterContent_TextChanged(object sender, TextChangedEventArgs e)
         {
-
             var txtbox = sender as TextBox;
             Filter(txtbox);
         }

@@ -26,20 +26,20 @@ namespace Estate.View.Pages.SubPages.Property
         public Search()
         {
             InitializeComponent();
-            DataGridElement.ItemsSource = new PropertyModelView<PropertyData>().GetAllData;
+            DataGridElement.ItemsSource = new PropertyModelView<PropertyData>().GetAll();
         }
 
         private void Filter(TextBox tb)
         {
             if (tb.Text != "")
             {
-                var filterProperty = Propdata.GetAllData.Where(x =>
-                x.FullName.ToLower().Contains(tb.Text.ToLower()) ||
-                x.LineOne.ToLower().Contains(tb.Text.ToLower()) ||
-                x.LineTwo.ToLower().Contains(tb.Text.ToLower()) ||
-                x.PostCode.ToLower().Contains(tb.Text.ToLower()) ||
-                x.City.ToLower().Contains(tb.Text.ToLower()) ||
-                x.Country.ToLower().Contains(tb.Text.ToLower()) ||
+                var filterProperty = Propdata.GetAll().Where(x =>
+                x.OwnerName.ToLower().Contains(tb.Text.ToLower()) ||
+                x.Address.LineOne.ToLower().Contains(tb.Text.ToLower()) ||
+                x.Address.LineTwo.ToLower().Contains(tb.Text.ToLower()) ||
+                x.Address.PostCode.ToLower().Contains(tb.Text.ToLower()) ||
+                x.Address.City.ToLower().Contains(tb.Text.ToLower()) ||
+                x.Address.Country.ToLower().Contains(tb.Text.ToLower()) ||
                 x.Phone.ToLower().Contains(tb.Text.ToLower())
                 );
                 DataGridElement.ItemsSource = null;
@@ -47,7 +47,7 @@ namespace Estate.View.Pages.SubPages.Property
             }
             else
             {
-                DataGridElement.ItemsSource = new PropertyModelView<PropertyData>().GetAllData;
+                DataGridElement.ItemsSource = new PropertyModelView<PropertyData>().GetAll();
             }
         }
         private void FilterContent_TextChanged(object sender, TextChangedEventArgs e)
@@ -59,14 +59,14 @@ namespace Estate.View.Pages.SubPages.Property
 
         public void Dsort()
         {
-            var DESCsortGrid = Propdata.GetAllData.OrderByDescending(x => x.FullName.ToLower());
+            var DESCsortGrid = Propdata.GetAll().OrderByDescending(x => x.OwnerName.ToLower());
             DataGridElement.ItemsSource = null;
             DataGridElement.ItemsSource = DESCsortGrid;
         }
 
         public void Asort()
         {
-            var ASCsort = Propdata.GetAllData.OrderBy(x => x.FullName.ToLower());
+            var ASCsort = Propdata.GetAll().OrderBy(x => x.OwnerName.ToLower());
             DataGridElement.ItemsSource = null;
             DataGridElement.ItemsSource = ASCsort;
         }

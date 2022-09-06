@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Estate.ModelView.Classes;
 using Estate.Pages;
 
 namespace Estate.Windows.HomeWin
@@ -28,6 +29,7 @@ namespace Estate.Windows.HomeWin
 
             FrameHomeMain.Content = new HomePage().Content;
             dateHomeWin(); // to implement Date Calender in Home Window
+            IsEnableBtn();
 
         }
 
@@ -48,10 +50,14 @@ namespace Estate.Windows.HomeWin
             DayDateHomeWin.Text = ad.AppDateHomeWin()[0];
             MonthDateHomeWin.Text = ad.AppDateHomeWin()[1];
             
+            
         }
 
         private void Landlord_Button_Click(object sender, RoutedEventArgs e)
         {
+            var btn = (Button)sender;
+            btn.IsEnabled = false;
+
             LandlordPage lp = new LandlordPage();
             if (FrameHomeMain.Content != null)
             {
@@ -132,6 +138,27 @@ namespace Estate.Windows.HomeWin
             }
             FrameHomeMain.Content = dp.Content;
         }
+
+        private void IsEnableBtn()
+        {
+            var con = new CheckConnectionDatabase();
+            if (con.checkConnection() == true)
+            {
+                LandlordBtn.IsEnabled = true;
+                TenantBtn.IsEnabled = true;
+                PropertyBtn.IsEnabled = true;
+                MoneyBtn.IsEnabled = true;
+                ContractBtn.IsEnabled = true;
+                UserBtn.IsEnabled = true;
+                ChartBtn.IsEnabled = true;
+                CalenderBtn.IsEnabled = true;
+                SettingBtn.IsEnabled = true;
+                ReportBtn.IsEnabled = true;
+                NotificationBtn.IsEnabled = true;
+
+            }
+            else { return; }
+        }
     }
 
     /// <AppDate>
@@ -146,6 +173,18 @@ namespace Estate.Windows.HomeWin
             string[] dateArr = {dayDt, monthDt };
 
             return dateArr;
+        }
+    }
+
+    public static class IsEnableConnection
+    {
+        public static void btnsEnable()
+        {
+            var con = new CheckConnectionDatabase();
+            if (con.checkConnection() == true)
+            {
+                
+            }
         }
     }
     

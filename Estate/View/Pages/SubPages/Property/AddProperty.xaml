@@ -12,11 +12,11 @@
         <Style x:Name="txtbox" TargetType="{x:Type TextBox}">
             <Setter Property="Height" Value="25"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="MaxLength" Value="70"/>
+            <Setter Property="MaxLength" Value="50"/>
             <Setter Property="Width" Value="200"/>
         </Style>
         <Style x:Name="title" TargetType="{x:Type GroupBox}">
-            <Setter Property="FontWeight" Value="DemiBold"></Setter>
+            <Setter Property="FontWeight" Value="Thin"></Setter>
 
         </Style>
         <Style x:Name="btn" TargetType="Button">
@@ -43,27 +43,42 @@
                 <StackPanel FocusManager.FocusedElement="{Binding ElementName=tbfname}" Width="400" >
                     <Label>Owner Full Name</Label>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock x:Name="errFname" Foreground="Red" FontSize="20" Visibility="Hidden">*</TextBlock>
+                        
                         <ComboBox x:Name="tbfname" Width="200" SelectedIndex="0"></ComboBox>
+                        <TextBlock x:Name="errFname" Foreground="Red" FontSize="20" Visibility="Hidden">*</TextBlock>
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
-            <GroupBox Header="Porperty Address" Margin="10" Padding="10">
+            <GroupBox Header="Address" Margin="10" Padding="10">
                 <StackPanel Width="400">
                     <Label>Line One</Label>
-                    <TextBox x:Name="tbLineOne"></TextBox>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="tbLineOne"></TextBox>
+                    </StackPanel>
+
 
                     <Label>Line Two</Label>
-                    <TextBox x:Name="tbLineTwo"></TextBox>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="tbLineTwo"></TextBox>
+                    </StackPanel>
 
                     <Label>Post Code</Label>
-                    <TextBox x:Name="tbPostCode"></TextBox>
+                    <StackPanel Orientation="Horizontal">
+                        
+                        <TextBox x:Name="tbPostCode"></TextBox>
+                        <TextBlock x:Name="errPostCode" Foreground="Red" FontSize="20" Visibility="Hidden">*</TextBlock>
+                    </StackPanel>
 
                     <Label>City</Label>
-                    <TextBox x:Name="tbCity"></TextBox>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="tbCity"></TextBox>
+                    </StackPanel>
 
                     <Label>Country</Label>
-                    <ComboBox x:Name="cbCountries" Height="25" SelectedIndex="0"></ComboBox>
+                    <StackPanel Orientation="Horizontal">
+                        <ComboBox x:Name="cbCountries" Height="25" SelectedIndex="0"></ComboBox>
+                    </StackPanel>
+
                 </StackPanel>
 
             </GroupBox>
@@ -81,7 +96,7 @@
 
             <GroupBox Header="">
                 <StackPanel>
-                    <Button x:Name="btnSave" Content="Save" Click="btnSave_Button_Click"></Button>
+                    <Button x:Name="btnSave" Content="Save" Click="btnSave_Button_Click" IsEnabled="False"></Button>
                     <Button x:Name="btnClear" Content="Clear" Click="btnClear_Button_Click"></Button>
                 </StackPanel>
             </GroupBox>
