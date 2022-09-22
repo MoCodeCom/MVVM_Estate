@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Media.Imaging;
 
 namespace Estate.Model.Data
 {
@@ -18,7 +20,16 @@ namespace Estate.Model.Data
         private byte[] _image_2;
         private byte[] _image_3;
         private byte[] _image_4;
+        private BitmapSource _bitmapimage_1;
+        private BitmapSource _bitmapimage_2;
+        private BitmapSource _bitmapimage_3;
+        private BitmapSource _bitmapimage_4;
+        private Image _get_image_1;
+        private Image _get_image_2;
+        private Image _get_image_3;
+        private Image _get_image_4;
         private int _owner_id;
+        private int _tenant_id;
 
         public PropertyData()
         {
@@ -73,6 +84,58 @@ namespace Estate.Model.Data
                 OnPropertyChanged(nameof(_address));
             } 
         }
+        public BitmapSource Bitmapimage_1
+        {
+            get { return _bitmapimage_1; }
+            set
+            {
+                if (_bitmapimage_1 != value)
+                {
+                    _bitmapimage_1 = value;
+                }
+                OnPropertyChanged(nameof(_bitmapimage_1));
+            }
+        }
+
+        public BitmapSource Bitmapimage_2
+        {
+            get { return _bitmapimage_2; }
+            set
+            {
+                if (_bitmapimage_2 != value)
+                {
+                    _bitmapimage_2 = value;
+                }
+                OnPropertyChanged(nameof(_bitmapimage_2));
+            }
+        }
+
+        public BitmapSource Bitmapimage_3
+        {
+            get { return _bitmapimage_3; }
+            set
+            {
+                if (_bitmapimage_3 != value)
+                {
+                    _bitmapimage_3 = value;
+                }
+                OnPropertyChanged(nameof(_bitmapimage_3));
+            }
+        }
+
+        public BitmapSource Bitmapimage_4
+        {
+            get { return _bitmapimage_4; }
+            set
+            {
+                if (_bitmapimage_4 != value)
+                {
+                    _bitmapimage_4 = value;
+                }
+                OnPropertyChanged(nameof(_bitmapimage_4));
+            }
+        }
+
         public byte[] Image_1
         {
             get { return _image_1; }
@@ -125,6 +188,19 @@ namespace Estate.Model.Data
             }
         }
 
+        public Image Get_Image_1
+        {
+            get { return _get_image_1; }
+            set
+            {
+                if (_get_image_1 != value)
+                {
+                    _get_image_1 = value;
+                }
+                OnPropertyChanged(nameof(_get_image_1));
+            }
+        }
+
         public int Owner_id
         {
             get { return _owner_id; }
@@ -135,6 +211,19 @@ namespace Estate.Model.Data
                     _owner_id = value;
                 }
                 OnPropertyChanged(nameof(_owner_id));
+            }
+        }
+
+        public int Tenant_id
+        {
+            get { return _tenant_id; }
+            set
+            {
+                if (_tenant_id != value)
+                {
+                    _tenant_id = value;
+                }
+                OnPropertyChanged(nameof(_tenant_id));
             }
         }
 

@@ -56,7 +56,6 @@ namespace Estate.Windows.HomeWin
         private void Landlord_Button_Click(object sender, RoutedEventArgs e)
         {
             var btn = (Button)sender;
-            btn.IsEnabled = false;
 
             LandlordPage lp = new LandlordPage();
             if (FrameHomeMain.Content != null)

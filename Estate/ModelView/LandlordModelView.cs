@@ -28,7 +28,7 @@ namespace Estate.ModelView
         public AddressData addressData;
         CheckPhone<LandlordData> checkPhone = new CheckPhone<LandlordData>();
         private string connStr = new ConnectionStr().conStr;
-        string conStrNormal = "Data Source = ./maindb.db";
+        //string conStrNormal = "Data Source = ./maindb.db";
         
 
         //**************************************************************************//
@@ -101,7 +101,7 @@ namespace Estate.ModelView
 
             string commandStr = "SELECT * FROM LandlordTable INNER JOIN AddressTable ON LandlordTable.id = AddressTable.landlord_id;";
 
-            SQLiteConnection conn = new SQLiteConnection(conStrNormal);
+            SQLiteConnection conn = new SQLiteConnection(connStr);
             SQLiteDataAdapter da = new SQLiteDataAdapter(commandStr, conn);
             DataTable dt = new DataTable();
             da.Fill(dt);

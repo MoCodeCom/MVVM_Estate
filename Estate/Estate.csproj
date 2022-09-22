@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>house.ico</ApplicationIcon>
+    <UseWindowsForms>True</UseWindowsForms>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,6 +15,7 @@
     <None Remove="Model\Images\Ascending.png" />
     <None Remove="Model\Images\Chart.png" />
     <None Remove="Model\Images\Contract.png" />
+    <None Remove="Model\Images\DefaultPicture.png" />
     <None Remove="Model\Images\Delete.png" />
     <None Remove="Model\Images\Descending.png" />
     <None Remove="Model\Images\Diry.png" />
@@ -70,6 +72,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Model\Images\Contract.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Model\Images\DefaultPicture.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Model\Images\Delete.png">

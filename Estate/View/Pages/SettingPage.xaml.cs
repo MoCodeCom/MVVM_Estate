@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Estate.View.Pages.Classes;
+using Estate.View.Pages.SubPages.Landlord;
+using Estate.View.Pages.SubPages.Sitting;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +26,12 @@ namespace Estate.Pages
         public SettingPage()
         {
             InitializeComponent();
+        }
+
+        private void btnDefaultImage_Click(object sender, RoutedEventArgs e)
+        {
+            DefaultPicture DefaultPicturePage = new DefaultPicture();
+            FrameChange f = new FrameChange(DefaultPicturePage, LandlordFrame);
         }
     }
 }

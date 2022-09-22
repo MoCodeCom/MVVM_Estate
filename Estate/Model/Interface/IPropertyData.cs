@@ -17,5 +17,6 @@ namespace Estate.Model.Interface
         public byte[] Image_4 { get; set; }
         public int Owner_id { get; set; }
         public string Phone { get; set; }
+        public int Tenant_id { get; set; }
     }
 }

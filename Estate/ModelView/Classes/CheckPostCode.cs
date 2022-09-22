@@ -1,5 +1,4 @@
-﻿using Estate.Model.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SQLite;
@@ -7,19 +6,19 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace Estate.ModelView.Classes
 {
-    public class CheckPhone<T>
+    public static class CheckPostCode<T>
     {
-        private string ConnString = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
-        public bool checkPhoneExists(T lld, string tableName)
+        private static string ConnString = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
+        public static bool checkPostcodeExists(string postcodeStr, string tableName)
         {
+            
             bool result = false;
             //string constr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
-            string CommandString = "SELECT * FROM "+tableName+" WHERE phone = '" + lld+".Phone" + "';";
+            string CommandString = "SELECT * FROM " + tableName + " WHERE postcode = '"+ postcodeStr +"';";
             try
             {
 
@@ -33,15 +32,16 @@ namespace Estate.ModelView.Classes
             {
                 MessageBox.Show(ex.Message);
             }
+            MessageBox.Show(result.ToString());
             return result;
         }
-
-        public int GetIdByPhone(string phoneStr, string tableName)
+        public static int GetIdByPostcode(string postcodeStr, string tableNameStr )
         {
             int id = 0;
+
             //string constr = ConfigurationManager.ConnectionStrings["Default"].ConnectionString;
             string commandid =
-                "SELECT id FROM "+tableName+" WHERE phone='" + phoneStr + "';";
+                "SELECT id FROM " + tableNameStr + " WHERE postcode= '" + postcodeStr + "';";
             try
             {
                 SQLiteConnection conId = new SQLiteConnection(ConnString);
@@ -59,10 +59,6 @@ namespace Estate.ModelView.Classes
             }
             return id;
         }
-        public static bool IsValidPhone(string phone)
-        {
-            Regex n = new Regex("^[0-9]{11}$");
-            return n.IsMatch(phone);
-        }
+    
     }
 }

@@ -119,10 +119,9 @@ namespace Estate.View.Pages.SubPages.Landlord
                         break;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
     }

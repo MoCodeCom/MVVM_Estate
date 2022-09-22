@@ -74,7 +74,6 @@ namespace Estate.View.Pages.SubPages.Landlord
             try
             {
 
-                
                 if (tbfname.Text == "" && tblname.Text == "" && tbPhone.Text =="" &&tbEmail.Text =="" )
                 {
                     Reject();

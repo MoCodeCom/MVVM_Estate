@@ -69,18 +69,32 @@ namespace Estate.View.Pages.SubPages.Property
             try
             {
                 var selectedItem = DataGridProperty.SelectedItem as PropertyData;
-                MessageBox.Show(selectedItem.OwnerName.ToString() + " will deleted");
-                string fullname = (selectedItem.OwnerName).ToString();
+                MessageBoxResult Result = MessageBox.Show(selectedItem.Address.PostCode.ToString() + " will delete from the system.", "Delete",
+                    MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+                switch (Result)
+                {
+                    case MessageBoxResult.None:
 
+                        break;
+                    case MessageBoxResult.OK:
+                        //To get the item's id.
+                        //int SeletctedItemId = Convert.ToInt32( lldata.GetId(selectedItem));
+                        int SeletctedItemId = Convert.ToInt32(Propdata.GetIdByPostcode(selectedItem.Address.PostCode));
+                        //To delete item by id.
+                        Propdata.DeleteById(SeletctedItemId);
 
-                //DataGridProperty.ItemsSource = lldata.DeleteByFullName(fullname);
-
-
+                        MessageBox.Show("Delete is done.");
+                        DataGridProperty.ItemsSource = new PropertyModelView<PropertyData>().GetAll();
+                        break;
+                    case MessageBoxResult.Cancel:
+                        break;
+                    default:
+                        break;
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                MessageBox.Show(ex.Message);
             }
         }
     }

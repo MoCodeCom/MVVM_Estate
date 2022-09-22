@@ -9,8 +9,76 @@
       Title="SettingPage">
 
     <Grid>
-        <Image Source="C:\Users\PC Mohammed\Desktop\VS\Projects\Estate\Estate\Images\House.png" 
-               Width="100" Height="100"></Image>
-        <TextBlock FontSize="20" Padding="10" FontWeight="Bold">Setting Page</TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Ribbon x:Name="RibbonLandlordPage" SelectedIndex="0">
+            <!-- Help Button -->
+            <Ribbon.HelpPaneContent>
+                <RibbonButton SmallImageSource="pack://application:,,,/Model/Images/help.png"></RibbonButton>
+            </Ribbon.HelpPaneContent>
+
+            <!-- Quick Access -->
+
+
+            <!-- Side Menu -->
+            <Ribbon.ApplicationMenu >
+                <RibbonApplicationMenu Visibility="Hidden"></RibbonApplicationMenu>
+            </Ribbon.ApplicationMenu>
+
+            <!-- Tab Menu & Groups -->
+            <RibbonTab Header="Landlords" KeyTip="L">
+                <RibbonGroup Header="Sort">
+                    <RibbonButton LargeImageSource="pack://application:,,,/Model/Images/DefaultPicture.png" 
+                                  Label="Default Image" x:Name="btnDefaultImage" Click="btnDefaultImage_Click"></RibbonButton>
+                    
+                </RibbonGroup>
+                <RibbonGroup Header="Search">
+                    <RibbonButton LargeImageSource="C:\Users\PC Mohammed\Desktop\VS\Projects\MVVM\Estate\Estate\Model\Images\Search.png" 
+                              Label="Search" Name="btnSearch" ></RibbonButton>
+                </RibbonGroup>
+            </RibbonTab>
+            <RibbonTab Header="Add">
+                <RibbonGroup Header="New">
+                    <RibbonButton LargeImageSource="pack://application:,,,/Model/Images/AddLandlord.png" Label="Add"
+                                  x:Name="AddLandlordButton" ></RibbonButton>
+                </RibbonGroup>
+
+            </RibbonTab>
+            <RibbonTab Header="Edit">
+                <RibbonGroup Header="Edit Landlord">
+                    <RibbonButton LargeImageSource="pack://application:,,,/Model/Images/EditLandLord.png" 
+                                  Label="Landlord" x:Name="EditLandlordButton" ></RibbonButton>
+                </RibbonGroup>
+            </RibbonTab>
+            <RibbonTab Header="Delete">
+
+                <RibbonGroup Header="Delete">
+                    <RibbonButton LargeImageSource="pack://application:,,,/Model/Images/Delete.png" 
+                              Label="Delete" x:Name="DeleteLandlordButton" ></RibbonButton>
+                </RibbonGroup>
+            </RibbonTab >
+            <RibbonTab Header="Report">
+                <RibbonGroup Header="Weekly">
+                    <RibbonButton LargeImageSource="pack://application:,,,/Model/Images/Weekly.png" 
+                                  Label="Weekly Report" x:Name="PrintWeeklyLandlordButton" 
+                                  ></RibbonButton>
+
+                </RibbonGroup>
+                <RibbonGroup Header="Monthly">
+                    <RibbonButton LargeImageSource="pack://application:,,,/Model/Images/Monthly.png" 
+                              Label="Monthly Report"></RibbonButton>
+                </RibbonGroup>
+                <RibbonGroup Header="Annually">
+                    <RibbonButton LargeImageSource="pack://application:,,,/Model/Images/Annual.png" 
+                              Label="Annually Report"></RibbonButton>
+                </RibbonGroup>
+            </RibbonTab>
+        </Ribbon>
+        <StackPanel x:Name="LandlordGrid" Grid.Row="1" Height="Auto">
+            <Frame x:Name="LandlordFrame" Height="Auto"></Frame>
+        </StackPanel>
     </Grid>
 </Page>

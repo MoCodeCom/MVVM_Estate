@@ -4,9 +4,15 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Estate.View.Pages.SubPages.Property"
+      
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Search">
+    <Page.Resources>
+        <Style x:Key="textDataGrid" TargetType="DataGrid">
+            <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
+        </Style>
+    </Page.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -16,19 +22,47 @@
 
         <StackPanel Background="LightGray" Grid.Row="0" Grid.Column="0">
             <DataGrid x:Name="DataGridElement" Padding="10" GridLinesVisibility="None" FontSize="13"
-                      AutoGenerateColumns="False" Height="450" AlternatingRowBackground="LightPink" 
-                      CanUserSortColumns="True" SelectionMode="Single" IsReadOnly="True"
+                      AutoGenerateColumns="False" Height="450" AlternatingRowBackground="#FFB300" 
+                      CanUserSortColumns="True" SelectionMode="Single" IsReadOnly="True" 
                       >
                 <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="OwnerName"  Width="2*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate >
+                                <TextBlock Text="{Binding OwnerName}" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
 
-                    <DataGridTextColumn Header="OwnerName" Binding="{Binding FullName}" Width="Auto"/>
-                    <DataGridTextColumn Header="LineOne" Binding="{Binding LineOne}" Width="Auto"/>
-                    <DataGridTextColumn Header="LineTwo" Binding="{Binding LineTwo}" Width="Auto"/>
-                    <DataGridTextColumn Header="PostCode" Binding="{Binding PostCode}" Width="Auto"/>
-                    <DataGridTextColumn Header="City" Binding="{Binding City}" Width="Auto"/>
-                    <DataGridTextColumn Header="Country" Binding="{Binding Country}" Width="Auto"/>
-                    <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" Width="Auto"/>
+                    <DataGridTemplateColumn Header="PostCode"  Width="1*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate >
+                                <TextBlock Text="{Binding Address.PostCode}" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
 
+                    <DataGridTemplateColumn Header="City"  Width="1*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate >
+                                <TextBlock Text="{Binding Address.City}" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    
+                    <DataGridTemplateColumn Header="Image"  IsReadOnly="True" Width="450">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Width="100" Height="100" x:Name="i1Image"
+                                       Margin="10,10,10,10"
+                                       OverridesDefaultStyle="True" Stretch="Fill"
+                                       Source="{Binding Bitmapimage_1}"
+                                       HorizontalAlignment="Right"
+                                       >
+                                </Image>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
 
             </DataGrid>
@@ -37,6 +71,9 @@
             <Label Margin="30,0,0,0">Search</Label>
             <TextBox x:Name="FilterContent" Width="200" Height="25" TextChanged="FilterContent_TextChanged"
                       ></TextBox>
+            <Image Height="100" Width="100" x:Name="imageMain" Source="{Binding Bitmapimage}">
+                
+            </Image>
 
         </StackPanel>
     </Grid>

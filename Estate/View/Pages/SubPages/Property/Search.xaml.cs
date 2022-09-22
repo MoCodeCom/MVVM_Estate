@@ -1,7 +1,11 @@
 ﻿using Estate.Model.Data;
 using Estate.ModelView;
+using Estate.ModelView.Classes;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +18,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Image = System.Drawing.Image;
 
 namespace Estate.View.Pages.SubPages.Property
 {
@@ -23,14 +28,16 @@ namespace Estate.View.Pages.SubPages.Property
     public partial class Search : Page
     {
         PropertyModelView<PropertyData> Propdata = new PropertyModelView<PropertyData>();
+        public Image ImageProperty;
         public Search()
         {
             InitializeComponent();
-            DataGridElement.ItemsSource = new PropertyModelView<PropertyData>().GetAll();
+            DataGridElement.ItemsSource = Propdata.GetAll();
         }
 
         private void Filter(TextBox tb)
         {
+            
             if (tb.Text != "")
             {
                 var filterProperty = Propdata.GetAll().Where(x =>
@@ -47,23 +54,21 @@ namespace Estate.View.Pages.SubPages.Property
             }
             else
             {
-                DataGridElement.ItemsSource = new PropertyModelView<PropertyData>().GetAll();
+                DataGridElement.ItemsSource = Propdata.GetAll();
             }
+            
         }
         private void FilterContent_TextChanged(object sender, TextChangedEventArgs e)
         {
-
             var txtbox = sender as TextBox;
             Filter(txtbox);
         }
-
         public void Dsort()
         {
             var DESCsortGrid = Propdata.GetAll().OrderByDescending(x => x.OwnerName.ToLower());
             DataGridElement.ItemsSource = null;
             DataGridElement.ItemsSource = DESCsortGrid;
         }
-
         public void Asort()
         {
             var ASCsort = Propdata.GetAll().OrderBy(x => x.OwnerName.ToLower());

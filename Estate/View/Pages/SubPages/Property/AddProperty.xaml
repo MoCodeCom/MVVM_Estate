@@ -44,7 +44,7 @@
                     <Label>Owner Full Name</Label>
                     <StackPanel Orientation="Horizontal">
                         
-                        <ComboBox x:Name="tbfname" Width="200" SelectedIndex="0"></ComboBox>
+                        <ComboBox x:Name="cbfname" Width="200" SelectedIndex="0"></ComboBox>
                         <TextBlock x:Name="errFname" Foreground="Red" FontSize="20" Visibility="Hidden">*</TextBlock>
                     </StackPanel>
                 </StackPanel>
@@ -94,12 +94,22 @@
                 </StackPanel>
             </GroupBox>
 
+            <GroupBox>
+                <StackPanel>
+                    <Button x:Name="btnImage1" Content="Upload image 1" Click="btnImage1_Click"></Button>
+                    <Button x:Name="btnImage2" Content="Upload image 2" Click="btnImage2_Click"></Button>
+                    <Button x:Name="btnImage3" Content="Upload image 3" Click="btnImage3_Click"></Button>
+                    <Button x:Name="btnImage4" Content="Upload image 4" Click="btnImage4_Click"></Button>
+                </StackPanel>
+            </GroupBox>
+
             <GroupBox Header="">
                 <StackPanel>
                     <Button x:Name="btnSave" Content="Save" Click="btnSave_Button_Click" IsEnabled="False"></Button>
                     <Button x:Name="btnClear" Content="Clear" Click="btnClear_Button_Click"></Button>
                 </StackPanel>
             </GroupBox>
+            
         </StackPanel>
     </Grid>
 </Page>
